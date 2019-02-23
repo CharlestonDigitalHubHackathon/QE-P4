@@ -93,6 +93,7 @@ export class GameStep4Component implements OnInit {
             this.gameService.deathText.next('The space shuttle springs to life, but lurches suddenly. You hear a loud metallic ripping and look back to see the back half of the shuttle, now torn from the rest of the ship, just before the shuttle explodes. You feel a warming sensation as your body is engulfed by the flames');
           } else {
             this.gameService.wonTheGame.next(true);
+            this.gameService.money.next(10);
           }
         } else {
           this.button4Pressed = true;

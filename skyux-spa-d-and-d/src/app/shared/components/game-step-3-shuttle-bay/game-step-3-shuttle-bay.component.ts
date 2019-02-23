@@ -67,15 +67,18 @@ export class GameStep3ShuttleBayComponent implements OnInit {
     switch (id) {
       case 1:
         this.gameService.gameStep.next(4);
+        this.gameService.money.next(5);
         break;
       case 2:
         this.gameService.gameStep.next(5);
+        this.gameService.money.next(4);
         break;
       case 3:
         // Elevator (at Shuttle bay)
         break;
       case 4:
         this.gameService.gameStep.next(6);
+        this.gameService.money.next(4);
         break;
     }
   }

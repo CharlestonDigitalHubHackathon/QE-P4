@@ -55,6 +55,7 @@ export class GameStepStairwayComponent implements OnInit {
     switch (id) {
       case 1:
         this.gameService.gameStep.next(3);
+        this.gameService.money.next(4);
         break;
       case 2:
         this.gameService.isDead.next(true);

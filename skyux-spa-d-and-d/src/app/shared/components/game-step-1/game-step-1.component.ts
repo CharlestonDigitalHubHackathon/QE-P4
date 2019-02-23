@@ -69,6 +69,7 @@ export class GameStep1Component implements OnInit {
         // this.gameService.gameStep.next(2);
         // Shortcut for presentations
         this.gameService.gameStep.next(6);
+        this.gameService.money.next(3);
         break;
       case 2:
         this.gameService.isDead.next(true);

@@ -65,9 +65,11 @@ export class GameStep5Component implements OnInit {
       case 1:
         this.gameService.dockingClamp.next(true);
         this.gameService.gameStep.next(3);
+        this.gameService.money.next(5);
         break;
       case 2:
         this.gameService.gameStep.next(3);
+        this.gameService.money.next(5);
         break;
     }
   }
