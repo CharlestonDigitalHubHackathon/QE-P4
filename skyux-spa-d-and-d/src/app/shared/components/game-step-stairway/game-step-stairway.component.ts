@@ -8,17 +8,17 @@ import { Character } from '../../models';
 import { GameService } from '../../services';
 
 @Component({
-  selector: 'app-game-step-1',
-  templateUrl: './game-step-1.component.html',
-  styleUrls: ['./game-step-1.component.scss']
+  selector: 'app-game-step-stairway',
+  templateUrl: './game-step-stairway.component.html',
+  styleUrls: ['./game-step-stairway.component.scss']
 })
-export class GameStep1Component implements OnInit {
+export class GameStepStairwayComponent implements OnInit {
 
   private character: Character;
 
   private SHIFT_NUM = Math.floor(Math.random() * Math.floor(26));
 
-  public choices: any[];
+  public choices: object[];
 
   public WIDTH = 400;
 
@@ -64,20 +64,6 @@ export class GameStep1Component implements OnInit {
   public makeChoice(id: number) {
     var choice = this.choices.find((v) => v.id === id);
     console.log('Choice made: ' + JSON.stringify(choice));
-    switch (id) {
-      case 1:
-        // this.gameService.gameStep.next(2);
-        // Shortcut for presentations
-        this.gameService.gameStep.next(6);
-        break;
-      case 2:
-        this.gameService.isDead.next(true);
-        break;
-      case 3:
-        this.gameService.isDead.next(true);
-        this.gameService.deathText.next('The alien is mad');
-        break;
-    }
   }
 
   private caesarShift(str: string, amount: number): string {

@@ -8,8 +8,22 @@
   Start the Game!
 </button>
 
-<app-game-step-1 *ngIf="gameStarted">
-</app-game-step-1>
+<div *ngIf="!characterIsDead && gameStarted">
+  <app-game-step-1 *ngIf="currentStep === 1">
+  </app-game-step-1>
+</div>
+
+<div *ngIf="characterIsDead">
+  You're dead!
+
+  <button
+    type="button"
+    class="sky-btn sky-btn-primary"
+    (click)="tryAgain()">
+    Try Again
+  </button>
+
+</div>
 
 <!-- <app-nav-footer>
 </app-nav-footer> -->
