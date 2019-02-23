@@ -9,4 +9,11 @@ import {
 })
 export class StudentDetailsComponent {
 
+  public gameStarted = false;
+
+  public startGame() {
+    console.log('Starting the game');
+    this.gameStarted = true;
+  }
+
 }

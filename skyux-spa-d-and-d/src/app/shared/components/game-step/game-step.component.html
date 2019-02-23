@@ -1,0 +1,51 @@
+<h1>Experimental Lab</h1>
+
+<div>
+  <section>
+    <div id="canvasesdiv" style="position:relative; width:400px; height:300px">
+      <canvas #layer1
+        style="z-index: 2;
+        position:absolute;
+        left:0px;top:0px;
+        " height="300px" width="400">
+        This text is displayed if your browser does not support HTML5 Canvas.
+      </canvas>
+      <canvas #layer2
+        style="z-index: 0;
+        position:absolute;
+        left:0px;
+        top:0px;
+        " height="300px" width="400">
+        This text is displayed if your browser does not support HTML5 Canvas.
+      </canvas>
+      <canvas #layer3
+        style="z-index: 3;
+        position:absolute;
+        left:0px;
+        top:0px;
+        " height="300px" width="400">
+        This text is displayed if your browser does not support HTML5 Canvas.
+      </canvas>
+    </div>
+  </section>
+</div>
+
+<p>
+  Body copy
+</p>
+
+<sky-action-button-container>
+  <sky-action-button
+    *ngFor="let choice of choices"
+    (actionClick)="makeChoice()">
+    <sky-action-button-icon
+      iconType="filter">
+    </sky-action-button-icon>
+    <sky-action-button-header>
+      Build a new list
+    </sky-action-button-header>
+    <sky-action-button-details>
+      Start from scratch and fine-tune with filters
+    </sky-action-button-details>
+  </sky-action-button>
+</sky-action-button-container>

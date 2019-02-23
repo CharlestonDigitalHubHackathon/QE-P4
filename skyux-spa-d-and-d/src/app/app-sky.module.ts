@@ -10,10 +10,15 @@ import {
   SkyAlertModule
 } from '@skyux/indicators';
 
+import {
+  SkyActionButtonModule
+} from '@skyux/layout';
+
 @NgModule({
   exports: [
     SkyAppLinkModule,
-    SkyAlertModule
+    SkyAlertModule,
+    SkyActionButtonModule
   ]
 })
 export class AppSkyModule { }
