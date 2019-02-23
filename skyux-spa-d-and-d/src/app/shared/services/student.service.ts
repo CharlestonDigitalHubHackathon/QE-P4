@@ -7,6 +7,10 @@ import {
 } from '@angular/common/http';
 
 import {
+  Router
+} from '@angular/router';
+
+import {
   Observable
 } from 'rxjs';
 
@@ -23,19 +27,25 @@ export class StudentService {
 
   constructor(
     private skyAppConfig: SkyAppConfig,
-    private http: HttpClient
+    private http: HttpClient,
+    private router: Router
   ) {}
 
   public getAll(): Observable<Student[]> {
-    return this.http.get<Student[]>(`${this.bff}/students`);
+    return this.http.get<Student[]>(`${this.bff}/student`);
   }
 
   public get(id: string): Observable<Student> {
-    return this.http.get<Student>(`${this.bff}/students/${id}`);
+    return this.http.get<Student>(`${this.bff}/student/${id}`);
   }
 
   public add(student: Student): Observable<Student> {
-    return this.http.post<Student>(`${this.bff}/students`, student);
+    return this.http.post<Student>(`${this.bff}/student`, student);
+  }
+
+  public play(student: Student) {
+    const url = this.skyAppConfig.runtime.params.getUrl(`/student/details/${student.HS_ID}`);
+    this.router.navigateByUrl(url);
   }
 
   private get bff(): string {

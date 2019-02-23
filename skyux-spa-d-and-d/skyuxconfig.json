@@ -10,7 +10,9 @@
     ]
   },
   "params": {
-    "tid": true
+    "tid": {
+      "value": "example-teacher-id"
+    }
   },
   "appSettings": {
     "bff-characters": "https://buuko3kghc.execute-api.us-east-1.amazonaws.com/prod/dndCharacterCreation2",
