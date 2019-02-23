@@ -1,5 +1,6 @@
 import {
-  Component
+  Component,
+  Input
 } from '@angular/core';
 
 @Component({
@@ -10,6 +11,9 @@ import {
 export class StudentDetailsComponent {
 
   public gameStarted = false;
+
+  @Input()
+  public sid: string;
 
   public startGame() {
     console.log('Starting the game');

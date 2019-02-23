@@ -1,5 +1,3 @@
-declare var google: any;
-
 import {
   Component,
   OnInit
@@ -23,7 +21,6 @@ import {
   Location,
   Student
 } from '../../models';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-student-registration',
@@ -43,7 +40,6 @@ export class StudentRegistrationComponent implements OnInit {
   });
 
   constructor(
-    private router: Router,
     private skyAppConfig: SkyAppConfig,
     private characterService: CharacterService,
     private studentService: StudentService
@@ -80,8 +76,7 @@ export class StudentRegistrationComponent implements OnInit {
       .add(student)
       .subscribe(
         (studentAdded: Student) => {
-          console.log(studentAdded);
-          this.router.navigateByUrl('details');
+          this.studentService.play(studentAdded);
         },
         (err: any) => {
           this.error = err;
