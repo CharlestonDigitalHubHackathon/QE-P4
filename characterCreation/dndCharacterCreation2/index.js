@@ -145,55 +145,91 @@ function getLiterate(location, isFemale) {
 
 }
 
+function getEducationLevel(location, isFemale) {
+  return -1;
+}
+
+function getHealth(location) {
+  return -1;
+}
+
 function createCharacter(location) {
 
-    var character = {
-        location: location,
-        age: 16
-    };
+  if (!location || locations.indexOf(location) < 0) {
+    throw new Error('location query string parameter is required. Choose one of: ' + locations.toString());
+  }
 
-    var isFemale = getIsFemale(location);
-    character.gender = isFemale ? 'female' : 'male';
-    character.undernourished = getUndernourished(location);
-    character.literate = getLiterate(location, isFemale);
+  var character = {
+      location: location,
+      age: 16
+  };
 
-    var names;
-
-    switch (location) {
-      case 'Zimbabwe':
-        names = isFemale ? zimbabweFemaleNames : zimbabweMaleNames;
-        character.gni = 1170;
-        character.highSchoolEnrollment = isFemale ? 0.423 : 0.342;
-        character.undernourishedLikelihood = 0.4644;
-        break;
-      case 'United States':
-        names = isFemale ? usFemaleNames : usMaleNames;
-        character.gni = 58270;
-        character.highSchoolEnrollment = isFemale ? 0.891 : 0.851;
-        character.undernourishedLikelihood = 0.0250;
-        break;
-      case 'China':
-        names = isFemale ? chinaFemaleNames : chinaMaleNames;
-        character.gni = 8690;
-        // This data wasn't included in the measurements - used a number slightly lower than Mexico since they have similar years of school stats.
-        character.highSchoolEnrollment = isFemale ? 0.890 : 0.850;
-        character.undernourishedLikelihood = 0.0903;
-        break;
-      case 'Mexico':
-        names = isFemale ? mexicoFemaleNames : mexicoMaleNames;
-        character.gni = 8610;
-        character.highSchoolEnrollment = isFemale ? 0.898 : 0.854;
-        character.undernourishedLikelihood = 0.0376;
-        break;
-      default:
-        throw new Error('dev error unknown location 1: ' + location);
+  var isFemale = getIsFemale(location);
+  character.gender = isFemale ? 'female' : 'male';
+  character.undernourished = getUndernourished(location);
+  character.literate = getLiterate(location, isFemale);
+  character.educationLevel = getEducationLevel(location, isFemale);
+  character.baseHealth = getHealth(location);
+  character.shop = [
+    {
+      name: 'wrench',
+      description: 'todo',
+      cost: -1
+    },
+    {
+      name: 'jelly beans',
+      description: 'todo',
+      cost: -1
+    },
+    {
+      name: 'towel',
+      description: 'todo',
+      cost: -1
+    },
+    {
+      name: 'todo snack',
+      description: 'restores health',
+      cost: -1
     }
+  ];
 
-    character.name = names[getRandomInt(names.length)];
+  var names;
 
-    console.log('Created character: ' + JSON.stringify(character));
+  switch (location) {
+    case 'Zimbabwe':
+      names = isFemale ? zimbabweFemaleNames : zimbabweMaleNames;
+      character.usd = 1170;
+      // character.highSchoolEnrollment = isFemale ? 0.423 : 0.342;
+      // character.undernourishedLikelihood = 0.4644;
+      break;
+    case 'United States':
+      names = isFemale ? usFemaleNames : usMaleNames;
+      character.usd = 58270;
+      // character.highSchoolEnrollment = isFemale ? 0.891 : 0.851;
+      // character.undernourishedLikelihood = 0.0250;
+      break;
+    case 'China':
+      names = isFemale ? chinaFemaleNames : chinaMaleNames;
+      character.usd = 8690;
+      // This data wasn't included in the measurements - used a number slightly lower than Mexico since they have similar years of school stats.
+      // character.highSchoolEnrollment = isFemale ? 0.890 : 0.850;
+      // character.undernourishedLikelihood = 0.0903;
+      break;
+    case 'Mexico':
+      names = isFemale ? mexicoFemaleNames : mexicoMaleNames;
+      character.usd = 8610;
+      // character.highSchoolEnrollment = isFemale ? 0.898 : 0.854;
+      // character.undernourishedLikelihood = 0.0376;
+      break;
+    default:
+      throw new Error('dev error unknown location 1: ' + location);
+  }
 
-    return character;
+  character.name = names[getRandomInt(names.length)];
+
+  console.log('Created character: ' + JSON.stringify(character));
+
+  return character;
 
 }
 
@@ -219,21 +255,29 @@ exports.handler = (event, context, callback) => {
         },
     });
 
-    switch (event.httpMethod) {
+    try {
+
+      switch (event.httpMethod) {
         // case 'DELETE':
-            // dynamo.deleteItem(JSON.parse(event.body), done);
-            // break;
+        // dynamo.deleteItem(JSON.parse(event.body), done);
+        // break;
         case 'GET':
-            // dynamo.scan({ TableName: event.queryStringParameters.TableName }, done);
-            done(null, createCharacter(event.queryStringParameters.location));
-            break;
+          // dynamo.scan({ TableName: event.queryStringParameters.TableName }, done);
+          if (!event.queryStringParameters) {
+            throw new Error('location is required. Choose one of: ' + locations.toString());
+          }
+          done(null, createCharacter(event.queryStringParameters.location));
+          break;
         // case 'POST':
-            // dynamo.putItem(JSON.parse(event.body), done);
-            // break;
+        // dynamo.putItem(JSON.parse(event.body), done);
+        // break;
         // case 'PUT':
-            // dynamo.updateItem(JSON.parse(event.body), done);
-            // break;
+        // dynamo.updateItem(JSON.parse(event.body), done);
+        // break;
         default:
-            done(new Error(`Unsupported method "${event.httpMethod}"`));
+        done(new Error(`Unsupported method "${event.httpMethod}"`));
+      }
+    } catch (ex) {
+      done(ex);
     }
 };
