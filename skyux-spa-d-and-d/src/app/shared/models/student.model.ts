@@ -1,7 +1,10 @@
-export interface Student {
-  HS_ID?: string;
-  HS_Name?: string;
-  HS_Share_Key?: string;
-  HS_Character_ID?: any;
-  HS_Character_Data?: any;
+import { Character } from './character.model';
+
+export class Student {
+  public HS_ID?: string;
+  public HS_Name?: string;
+  public HS_Share_Key?: string;
+  public HS_Character_ID?: any;
+  public HS_Character_Data?: any;
+  public character: Character;
 }
