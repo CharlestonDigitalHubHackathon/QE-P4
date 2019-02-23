@@ -36,19 +36,27 @@ const usFemaleNames = [
 ];
 
 const chinaMaleNames = [
-  'todo'
+  '张伟 Zhang Wei',
+  '王伟 Wang Wei',
+  '李伟 Li Wei'
 ];
 
 const chinaFemaleNames = [
-  'todo'
+  '王芳 Wang Fang',
+  '王秀英 Wang Xiu Ying',
+  '李秀英 Li Xiu Ying'
 ];
 
 const mexicoMaleNames = [
-  'todo'
+  'José Luis',
+  'Juan',
+  'Miguel Ángel'
 ];
 
 const mexicoFemaleNames = [
-  'todo'
+  'María Guadalupe',
+  'Juana',
+  'Margarita'
 ];
 
 
@@ -56,30 +64,126 @@ function getRandomInt(max) {
   return Math.floor(Math.random() * Math.floor(max));
 }
 
+function getIsFemale(location) {
+
+  var malesIn1000;
+
+  switch (location) {
+    case 'Zimbabwe':
+      // 166284 male out of 332643 = .500
+      malesIn1000 = 500;
+      break;
+    case 'United States':
+      // 2251388 male out of 4390212 = .513
+      malesIn1000 = 513;
+      break;
+    case 'China':
+      // 10321766 male out of 19425909 = .531
+      malesIn1000 = 531;
+      break;
+    case 'Mexico':
+      // 1023023 male out of 2050119 = .499
+      malesIn1000 = 499;
+      break;
+    default:
+      throw new Error('dev error unknown location 2: ' + location);
+  }
+
+  // true = female
+  return getRandomInt(1000) > malesIn1000;
+  // return !!getRandomInt(2) ? 'female' : 'male';
+
+}
+
+function getUndernourished(location) {
+
+  var in10000;
+
+  switch (location) {
+    case 'Zimbabwe':
+      in10000 = 4644;
+      break;
+    case 'United States':
+    in10000 = 0250;
+      break;
+    case 'China':
+      in10000 = 0903;
+      break;
+    case 'Mexico':
+      in10000 = 0376;
+      break;
+    default:
+      throw new Error('dev error unknown location 3: ' + location);
+  }
+
+  return getRandomInt(10000) > in10000;
+
+}
+
+function getLiterate(location, isFemale) {
+
+  var in1000;
+
+  switch (location) {
+    case 'Zimbabwe':
+       in1000 = isFemale ? 883 : 892;
+      break;
+    case 'United States':
+      in1000 = isFemale ? 990 : 990;
+      break;
+    case 'China':
+      in1000 = isFemale ? 927 : 975;
+      break;
+    case 'Mexico':
+      in1000 = isFemale ? 940 : 958;
+      break;
+    default:
+      throw new Error('dev error unknown location 4: ' + location);
+  }
+
+  return getRandomInt(1000) > in1000;
+
+}
+
 function createCharacter(location) {
 
     var character = {
         location: location,
-        age: 5
+        age: 16
     };
 
-    // TODO gender breakdown on country
-    character.gender = !!getRandomInt(2) ? 'female' : 'male';
+    var isFemale = getIsFemale(location);
+    character.gender = isFemale ? 'female' : 'male';
+    character.undernourished = getUndernourished(location);
+    character.literate = getLiterate(location, isFemale);
 
     var names;
 
     switch (location) {
       case 'Zimbabwe':
-        names = character.gender ? zimbabweFemaleNames : zimbabweMaleNames;
+        names = isFemale ? zimbabweFemaleNames : zimbabweMaleNames;
+        character.gni = 1170;
+        character.highSchoolEnrollment = isFemale ? 0.423 : 0.342;
+        character.undernourishedLikelihood = 0.4644;
         break;
       case 'United States':
-        names = character.gender ? usFemaleNames : usMaleNames;
+        names = isFemale ? usFemaleNames : usMaleNames;
+        character.gni = 58270;
+        character.highSchoolEnrollment = isFemale ? 0.891 : 0.851;
+        character.undernourishedLikelihood = 0.0250;
         break;
       case 'China':
-        names = character.gender ? chinaFemaleNames : chinaMaleNames;
+        names = isFemale ? chinaFemaleNames : chinaMaleNames;
+        character.gni = 8690;
+        // This data wasn't included in the measurements - used a number slightly lower than Mexico since they have similar years of school stats.
+        character.highSchoolEnrollment = isFemale ? 0.890 : 0.850;
+        character.undernourishedLikelihood = 0.0903;
         break;
       case 'Mexico':
-        names = character.gender ? mexicoFemaleNames : mexicoMaleNames;
+        names = isFemale ? mexicoFemaleNames : mexicoMaleNames;
+        character.gni = 8610;
+        character.highSchoolEnrollment = isFemale ? 0.898 : 0.854;
+        character.undernourishedLikelihood = 0.0376;
         break;
       default:
         throw new Error('dev error unknown location 1: ' + location);
@@ -87,16 +191,10 @@ function createCharacter(location) {
 
     character.name = names[getRandomInt(names.length)];
 
+    console.log('Created character: ' + JSON.stringify(character));
+
     return character;
 
-    // return {
-    //     name: 'Bobby',
-    //     location: 'Charleston, SC, USA',
-    //     // literate: true,
-    //     // educationYears: 16,
-    //     // age: 35,
-    //     gender: 'male'
-    // };
 }
 
 
