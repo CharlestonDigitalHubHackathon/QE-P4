@@ -1,13 +1,24 @@
-import { NgModule } from '@angular/core';
+import {
+  NgModule
+} from '@angular/core';
 
-// Specify entry components, module-level providers, etc. here.
 import {
   AppSkyModule
 } from './app-sky.module';
 
+import {
+  AgmCoreModule
+} from '@agm/core';
+
 @NgModule({
+  imports: [
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyD8oaVIMXyl-txot22B8NjejFxPJWEzAbc'
+    })
+  ],
   exports: [
-    AppSkyModule
+    AppSkyModule,
+    AgmCoreModule
   ],
   providers: [],
   entryComponents: []

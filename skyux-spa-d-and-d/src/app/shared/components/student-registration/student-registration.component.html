@@ -1,4 +1,63 @@
 <h1>Student Registration</h1>
 
+<sky-alert *ngIf="!teacherId">
+  <strong>Oops!</strong> Teacher ID is required.
+</sky-alert>
+
+<form
+  *ngIf="teacherId"
+  (ngSubmit)="onSubmit()">
+  <sky-alert alertType="info">
+    Welcome!  Let's get a few details before you can begin.
+  </sky-alert>
+  <div class="sky-form-group">
+    <p>
+      <label
+        class="sky-control-label sky-control-label-required">
+        {{ 'student_registration_form_teacher' | skyAppResources }}
+      </label>
+      {{ teacherId }}
+    </p>
+    <p>
+      <label
+        for="student-registration-name"
+        class="sky-control-label sky-control-label-required">
+        {{ 'student_registration_form_name' | skyAppResources }}
+      </label>
+      <input
+        class="sky-form-control"
+        id="student-registration-name"
+        type="text"
+        placeholder="Ex: Christi Fennel"
+        aria-required="true"
+        required>
+    </p>
+    <p>
+      <label
+        for="student-registration-character"
+        class="sky-control-label sky-control-label-required">
+        {{ 'student_registration_form_character' | skyAppResources }}
+      </label>
+    </p>
+    <agm-map
+      id="student-registration-character"
+      [latitude]="lat"
+      [longitude]="lng"
+      [streetViewControl]="false">
+      <agm-marker
+        [latitude]="lat"
+        [longitude]="lng">
+      </agm-marker>
+    </agm-map>
+    <p>
+      <button
+        type="submit"
+        class="sky-btn sky-btn-primary">
+        {{ 'student_registration_form_submit' | skyAppResources }}
+      </button>
+    </p>
+  </div>
+</form>
+
 <app-nav-footer>
 </app-nav-footer>

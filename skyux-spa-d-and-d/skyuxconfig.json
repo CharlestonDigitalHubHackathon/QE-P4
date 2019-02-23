@@ -8,5 +8,8 @@
       "src/app/app-styles.scss",
       "@skyux/theme/css/sky.css"
     ]
+  },
+  "params": {
+    "tid": true
   }
 }
