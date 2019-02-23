@@ -14,5 +14,6 @@ export class GameService {
   public character: ReplaySubject<Character> = new ReplaySubject(0);
   public isDead: ReplaySubject<boolean> = new ReplaySubject(0);
   public deathText: ReplaySubject<string> = new ReplaySubject(0);
+  public money: ReplaySubject<number> = new ReplaySubject(0);
 
 }
