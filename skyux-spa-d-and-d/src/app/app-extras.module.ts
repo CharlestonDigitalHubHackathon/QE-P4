@@ -3,12 +3,25 @@ import {
 } from '@angular/core';
 
 import {
+  HttpClientModule
+} from '@angular/common/http';
+
+import {
   AppSkyModule
 } from './app-sky.module';
 
 import {
   AgmCoreModule
 } from '@agm/core';
+
+import {
+  StudentService
+} from './shared/services/student.service';
+
+import {
+  SkyWaitService
+} from '@skyux/indicators';
+
 
 @NgModule({
   imports: [
@@ -18,9 +31,13 @@ import {
   ],
   exports: [
     AppSkyModule,
-    AgmCoreModule
+    AgmCoreModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [
+    StudentService,
+    SkyWaitService
+  ],
   entryComponents: []
 })
 export class AppExtrasModule { }

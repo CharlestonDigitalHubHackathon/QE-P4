@@ -6,6 +6,7 @@
 
 <form
   *ngIf="teacherId"
+  [formGroup]="registrationForm"
   (ngSubmit)="onSubmit()">
   <sky-alert alertType="info">
     Welcome!  Let's get a few details before you can begin.
@@ -25,10 +26,11 @@
         {{ 'student_registration_form_name' | skyAppResources }}
       </label>
       <input
+        formControlName="name"
         class="sky-form-control"
         id="student-registration-name"
         type="text"
-        placeholder="Ex: Christi Fennel"
+        placeholder="Ex: asdf asdf"
         aria-required="true"
         required>
     </p>
