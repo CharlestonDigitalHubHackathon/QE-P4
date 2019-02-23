@@ -1,4 +1,31 @@
 <h1>Teacher Details</h1>
 
+<sky-card
+  *ngFor="let student of students">
+  <sky-card-title>
+    {{ student.HS_Name }}
+  </sky-card-title>
+  <sky-card-content>
+    <sky-definition-list>
+      <sky-definition-list-content
+        *ngFor="let prop of student.HS_Character_Data | keyvalue">
+        <sky-definition-list-label>
+          {{ prop.key }}
+        </sky-definition-list-label>
+        <sky-definition-list-value>
+          {{ prop.value | json }}
+        </sky-definition-list-value>
+      </sky-definition-list-content>
+    </sky-definition-list>
+  </sky-card-content>
+  <sky-card-actions>
+    <button
+      class="sky-btn sky-btn-default"
+      (click)="play(student)">
+      {{ 'teacher_details_play' | skyAppResources }}
+    </button>
+  </sky-card-actions>
+</sky-card>
+
 <app-nav-footer>
 </app-nav-footer>

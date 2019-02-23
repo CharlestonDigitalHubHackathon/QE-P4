@@ -10,5 +10,8 @@
   },
   "student_registration_form_submit": {
     "message": "Register"
+  },
+  "teacher_details_play": {
+    "message": "Play"
   }
 }
