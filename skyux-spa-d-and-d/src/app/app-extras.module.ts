@@ -17,7 +17,8 @@ import {
 import {
   CharacterService,
   StudentService,
-  GameService
+  GameService,
+  WishlistService
 } from './shared/services';
 
 import {
@@ -40,7 +41,8 @@ import {
     CharacterService,
     StudentService,
     SkyWaitService,
-    GameService
+    GameService,
+    WishlistService
   ],
   entryComponents: []
 })
