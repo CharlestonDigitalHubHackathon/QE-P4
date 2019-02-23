@@ -15,7 +15,10 @@ export class GameStepComponent implements OnInit {
 
   private character: Character = {
     name: 'Bobby',
-    literate: false
+    literate: false,
+    items: [
+      'wrench'
+    ]
   };
 
   private SHIFT_NUM = Math.floor(Math.random() * Math.floor(26));
@@ -65,6 +68,15 @@ export class GameStepComponent implements OnInit {
     // this.ctx2 = (<HTMLCanvasElement>this.layer2.nativeElement).getContext('2d');
     // this.ctx3 = (<HTMLCanvasElement>this.layer3.nativeElement).getContext('2d');
     // this.drawAll, 20;
+
+    if (this.character.items.indexOf('wrench') >= 0) {
+      this.choices.push({
+          id: 3,
+          icon: 'wrench',
+          name: 'Throw wrench at the alien',
+          description: ''
+        });
+    }
   }
 
   public makeChoice(id: number) {
