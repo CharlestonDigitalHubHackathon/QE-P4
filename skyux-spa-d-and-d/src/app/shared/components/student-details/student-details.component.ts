@@ -25,6 +25,10 @@ export class StudentDetailsComponent implements OnInit {
 
   public currentStep: number;
 
+  public deathText: string;
+
+  public youWon = false;
+
   constructor (
     private studentService: StudentService,
     private gameService: GameService
@@ -39,6 +43,9 @@ export class StudentDetailsComponent implements OnInit {
   public tryAgain() {
     console.log('Try again');
     this.gameService.isDead.next(false);
+    this.gameService.gameStep.next(1);
+    this.gameService.wonTheGame.next(false);
+    this.gameStarted = false;
   }
 
   public ngOnInit() {
@@ -52,7 +59,9 @@ export class StudentDetailsComponent implements OnInit {
           literate: false,
           items: [
             'wrench'
-          ]
+          ],
+          undernourished: true,
+          hasBasicMath: false
         });
       });
 
@@ -60,8 +69,16 @@ export class StudentDetailsComponent implements OnInit {
       this.characterIsDead = dead;
     });
 
+    this.gameService.deathText.subscribe((text: string) => {
+      this.deathText = text;
+    });
+
     this.gameService.gameStep.subscribe((stepNum) => {
       this.currentStep = stepNum;
+    });
+
+    this.gameService.wonTheGame.subscribe((won) => {
+      this.youWon = won;
     });
   }
 

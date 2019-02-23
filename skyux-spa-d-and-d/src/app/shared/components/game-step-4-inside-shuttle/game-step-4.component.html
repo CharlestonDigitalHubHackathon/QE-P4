@@ -1,0 +1,45 @@
+<h2>Inside Shuttle</h2>
+
+<img src="~/assets/gameimages/Level4.png" [width]="WIDTH">
+
+<p>
+    Inside the space shuttle you see a small cockpit with flight controls and an array of four buttons. The engine of the shuttle is off. Undoubtedly, these buttons are used to start the engine and launch the shuttle. But what is the right order?
+</p>
+<p>
+    A closer inspection of the buttons reveals small symbols over each button<span *ngIf="character.hasBasicMath"> that appear to represent numbers</span><span *ngIf="!character.hasBasicMath">, but what can they mean?</span>
+</p>
+
+<p *ngIf="button1Pressed && !button2Pressed && !button3Pressed">
+  The button glows red. Three more to go.
+</p>
+<p *ngIf="button1Pressed && button2Pressed && !button3Pressed">
+  The button glows yellow. Two more to go.
+</p>
+<p *ngIf="button1Pressed && button2Pressed && button3Pressed">
+  The button glows green. One more to go.
+</p>
+<p *ngIf="!button1Pressed && button2Pressed || button1Pressed && !button2Pressed && button3Pressed">
+  You hear a loud buzzing sound and receive a shock.
+</p>
+
+<sky-alert
+  *ngIf="!character.hasBasicMath"
+  alertType="warning">
+  Your character does not know basic math. You will not be able to understand any numbers you come across.
+</sky-alert>
+
+<sky-action-button-container>
+  <sky-action-button
+    *ngFor="let choice of choices"
+    (actionClick)="makeChoice(choice.id)">
+    <sky-action-button-icon
+      [iconType]="choice.icon">
+    </sky-action-button-icon>
+    <sky-action-button-header>
+      {{ choice.name }}
+    </sky-action-button-header>
+    <sky-action-button-details>
+      {{ choice.description }}
+    </sky-action-button-details>
+  </sky-action-button>
+</sky-action-button-container>

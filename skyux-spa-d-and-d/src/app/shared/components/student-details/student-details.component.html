@@ -1,27 +1,73 @@
 <h1>Game Play ({{ sid }})</h1>
 
-<button
-  type="button"
-  class="sky-btn sky-btn-primary"
-  (click)="startGame()"
-  *ngIf="!gameStarted">
-  Start the Game!
-</button>
+<div *ngIf="!gameStarted">
+    <img src="~/assets/gameimages/Level0.png" width="600px">
+
+  <p>
+    <button
+      type="button"
+      class="sky-btn sky-btn-primary"
+      (click)="startGame()">
+      Start the Game!
+    </button>
+  </p>
+
+
+</div>
 
 <div *ngIf="!characterIsDead && gameStarted">
   <app-game-step-1 *ngIf="currentStep === 1">
   </app-game-step-1>
+
+  <app-game-step-stairway *ngIf="currentStep === 6">
+  </app-game-step-stairway>
+
+  <app-game-step-3-shuttle-bay *ngIf="currentStep === 3">
+    </app-game-step-3-shuttle-bay>
+
+
+  <app-game-step-4 *ngIf="currentStep === 4">
+    </app-game-step-4>
 </div>
 
 <div *ngIf="characterIsDead">
-  You're dead!
+  <h3>
+    You're dead!
+  </h3>
+  <img src="~/assets/gameimages/DeathScreen.png" width="400px">
+  <p>
+    {{ deathText }}
+  </p>
 
-  <button
+  <p>
+    <button
     type="button"
     class="sky-btn sky-btn-primary"
     (click)="tryAgain()">
     Try Again
   </button>
+</p>
+
+<div *ngIf="youWon">
+  <h3>
+    You won!
+  </h3>
+  <img src="~/assets/gameimages/SuccessScreen.png" width="600px">
+  <p>
+      Congratulations, you escaped the evil Zoobs! You now are the only human on earth to own your own interstallar spaceship. The Galaxy is yours to explore!
+  </p>
+  <p>
+      TO BE CONTINUED...
+  </p>
+
+  <p>
+    <button
+    type="button"
+    class="sky-btn sky-btn-primary"
+    (click)="tryAgain()">
+    Try Again
+  </button>
+</div>
 
 </div>
 

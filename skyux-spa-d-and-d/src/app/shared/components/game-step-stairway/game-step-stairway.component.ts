@@ -16,11 +16,9 @@ export class GameStepStairwayComponent implements OnInit {
 
   private character: Character;
 
-  private SHIFT_NUM = Math.floor(Math.random() * Math.floor(26));
+  public choices: any[];
 
-  public choices: object[];
-
-  public WIDTH = 400;
+  public WIDTH = 600;
 
   constructor(
     private gameService: GameService
@@ -37,73 +35,31 @@ export class GameStepStairwayComponent implements OnInit {
         this.choices = [
           {
             id: 1,
-            icon: 'arrow-circle-o-left',
-            name: this.character.literate ? 'Exit' : this.caesarShift('Exit', this.SHIFT_NUM),
-            description: 'Door 1'
+            icon: 'arrow-circle-o-up',
+            name: 'Go up',
+            description: this.character.undernourished ? 'You are severely malnourished. In your weakened state, going up the stairs will cost some of your health.' : ''
           },
           {
             id: 2,
-            icon: 'arrow-circle-o-right',
-            name: this.character.literate ? 'De-atomizer' : this.caesarShift('De-atomizer', this.SHIFT_NUM),
-            description: 'Door 2'
+            icon: 'arrow-circle-o-down',
+            name: 'Go down',
+            description: ''
           }
         ];
-
-        if (this.character.items.indexOf('wrench') >= 0) {
-          this.choices.push({
-              id: 3,
-              icon: 'wrench',
-              name: 'Throw wrench at the alien',
-              description: ''
-            });
-        }
-
       });
   }
 
   public makeChoice(id: number) {
     var choice = this.choices.find((v) => v.id === id);
     console.log('Choice made: ' + JSON.stringify(choice));
+    switch (id) {
+      case 1:
+        this.gameService.gameStep.next(3);
+        break;
+      case 2:
+        this.gameService.isDead.next(true);
+        this.gameService.deathText.next('You descend the stairs and enter a room where several more aliens are busy working at control panels and terminals. As you enter, the aliens stop their work and stare at you with looks of surprise. An impressive looking alien sitting in the middle of the room says, "Zoobs, seize the earthling!" Before you can react, two Zoobs grab you and subdue you. You feel a drowsy sensation as you are put to sleep. After the Zoobs are finished with their experiments, they jettison your lifeless body out the airlock.');
+    }
   }
 
-  private caesarShift(str: string, amount: number): string {
-
-    // Wrap the amount
-    if (amount < 0)
-      return this.caesarShift(str, amount + 26);
-
-    // Make an output variable
-    var output = '';
-
-    // Go through each character
-    for (var i = 0; i < str.length; i ++) {
-
-      // Get the character we'll be appending
-      var c = str[i];
-
-      // If it's a letter...
-      if (c.match(/[a-z]/i)) {
-
-        // Get its code
-        var code = str.charCodeAt(i);
-
-        // Uppercase letters
-        if ((code >= 65) && (code <= 90))
-          c = String.fromCharCode(((code - 65 + amount) % 26) + 65);
-
-        // Lowercase letters
-        else if ((code >= 97) && (code <= 122))
-          c = String.fromCharCode(((code - 97 + amount) % 26) + 97);
-
-      }
-
-      // Append
-      output += c;
-
-    }
-
-    // All done!
-    return output;
-
-  };
 }

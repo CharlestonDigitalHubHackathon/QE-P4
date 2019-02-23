@@ -1,0 +1,26 @@
+<h2>Shuttle Bay</h2>
+
+<img src="~/assets/gameimages/Level3.png" [width]="WIDTH">
+
+<p>
+    You enter what must be the Shuttle Bay – a large bay with a wide opening at one end, large enough for a plane to fly through. You see earth through the opening, slowly receding into the blackness of space.
+</p>
+<p>
+    A small, sleek spacecraft sits in the middle of the large bay, its door over door stands open, inviting you to climb aboard. To your left is a control panel with a large, glowing red button in its center. Behind you is a stairwell, leading down.
+</p>
+
+<sky-action-button-container>
+  <sky-action-button
+    *ngFor="let choice of choices"
+    (actionClick)="makeChoice(choice.id)">
+    <sky-action-button-icon
+      [iconType]="choice.icon">
+    </sky-action-button-icon>
+    <sky-action-button-header>
+      {{ choice.name }}
+    </sky-action-button-header>
+    <sky-action-button-details>
+      {{ choice.description }}
+    </sky-action-button-details>
+  </sky-action-button>
+</sky-action-button-container>

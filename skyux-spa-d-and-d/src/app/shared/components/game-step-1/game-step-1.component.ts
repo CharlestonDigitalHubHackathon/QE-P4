@@ -20,7 +20,7 @@ export class GameStep1Component implements OnInit {
 
   public choices: any[];
 
-  public WIDTH = 400;
+  public WIDTH = 600;
 
   constructor(
     private gameService: GameService
@@ -72,10 +72,11 @@ export class GameStep1Component implements OnInit {
         break;
       case 2:
         this.gameService.isDead.next(true);
+        this.gameService.deathText.next('you open the door and find yourself in a small chamber. The door closes behind you and a voice from a speaker says, "De-Atomizer Engaged." You feel a slight pinching sensation as all all the atoms of your body disintegrate. ');
         break;
       case 3:
         this.gameService.isDead.next(true);
-        this.gameService.deathText.next('The alien is mad');
+        this.gameService.deathText.next('The wrench strikes the alien in the back of its "head." It emits a gutteral howl and turns to face you. It pulls a strange contraption from its belt and aims it at you. You feel a tickling sensation as your body is flooded with electric current. The alien then jettisons your lifeless body out the airlock.');
         break;
     }
   }
