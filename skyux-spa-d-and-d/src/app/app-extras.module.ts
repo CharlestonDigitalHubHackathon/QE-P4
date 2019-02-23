@@ -15,8 +15,9 @@ import {
 } from '@agm/core';
 
 import {
+  CharacterService,
   StudentService
-} from './shared/services/student.service';
+} from './shared/services';
 
 import {
   SkyWaitService
@@ -35,6 +36,7 @@ import {
     HttpClientModule
   ],
   providers: [
+    CharacterService,
     StudentService,
     SkyWaitService
   ],

@@ -1,3 +1,5 @@
+declare var google: any;
+
 import {
   Component,
   OnInit
@@ -13,16 +15,15 @@ import {
 } from '@skyux/config';
 
 import {
-  SkyWaitService
-} from '@skyux/indicators';
-
-import {
+  CharacterService,
   StudentService
 } from '../../services';
 
 import {
+  Location,
   Student
 } from '../../models';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-student-registration',
@@ -33,41 +34,57 @@ export class StudentRegistrationComponent implements OnInit {
 
   public error: string;
   public teacherId: string;
-  public lat = 32.7847535;
-  public lng = -79.9441087;
+  public locations: Location[];
+  public selectedLocation: Location;
+  public selectedCharacter: any;
 
   public registrationForm = new FormGroup({
     name: new FormControl('')
   });
 
   constructor(
+    private router: Router,
     private skyAppConfig: SkyAppConfig,
-    // private skyWaitService: SkyWaitService,
+    private characterService: CharacterService,
     private studentService: StudentService
   ) {}
 
   public ngOnInit() {
+    this.characterService
+      .getLocations()
+      .subscribe((locations: Location[]) => {
+        this.locations = locations;
+      });
+
     this.teacherId = this.skyAppConfig.runtime.params.get('tid');
+  }
+
+  public markerClick(location: Location, index: number) {
+    this.selectedLocation = location;
+    this.characterService
+      .getCharacter(location)
+      .subscribe((character: any) => {
+        this.selectedCharacter = character;
+      });
   }
 
   public onSubmit() {
     const student: Student = {
-      name: this.registrationForm.controls.name.value
+      name: this.registrationForm.controls.name.value,
+      character: JSON.stringify(this.selectedCharacter)
     };
 
     this.error = '';
-    // this.skyWaitService.beginBlockingPageWait();
 
     this.studentService
       .add(student)
       .subscribe(
         (studentAdded: Student) => {
           console.log(studentAdded);
-          // this.skyWaitService.endBlockingPageWait();
+          this.router.navigateByUrl('details');
         },
         (err: any) => {
           this.error = err;
-          // this.skyWaitService.endBlockingPageWait();
         }
       );
   }

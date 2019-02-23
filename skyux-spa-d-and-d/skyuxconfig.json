@@ -14,6 +14,6 @@
   },
   "appSettings": {
     "bff-characters": "https://buuko3kghc.execute-api.us-east-1.amazonaws.com/prod/dndCharacterCreation2",
-    "bff-students": "https://w6vvtstn3c.execute-api.us-east-1.amazonaws.com/prod/"
+    "bff-students": "https://w6vvtstn3c.execute-api.us-east-1.amazonaws.com/prod"
   }
 }
