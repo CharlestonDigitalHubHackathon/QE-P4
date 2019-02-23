@@ -27,7 +27,7 @@ export class MoneyMeterComponent implements OnInit {
     private modalService: SkyModalService,
     private wishlistService: WishlistService
   ) {
-    // this.gameService.money.next(2);
+    this.gameService.money.next(2);
   }
 
   public ngOnInit() {
