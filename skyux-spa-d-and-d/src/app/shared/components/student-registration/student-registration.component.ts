@@ -66,8 +66,8 @@ export class StudentRegistrationComponent implements OnInit {
 
   public onSubmit() {
     const student: Student = {
-      HS_ID: this.registrationForm.controls.name.value,
-      HS_SHARE_KEY: this.skyAppConfig.runtime.params.get('tid'),
+      HS_Name: this.registrationForm.controls.name.value,
+      HS_Share_Key: this.skyAppConfig.runtime.params.get('tid'),
       HS_Character_ID: JSON.stringify(this.selectedCharacter)
     };
 
@@ -77,7 +77,7 @@ export class StudentRegistrationComponent implements OnInit {
       .add(student)
       .subscribe(
         (studentAdded: Student) => {
-          this.studentService.play(studentAdded.HS_ID);
+          this.studentService.play(studentAdded);
         },
         (err: any) => {
           this.error = err;
