@@ -6,12 +6,14 @@ import {
   SkyAppLinkModule
 } from '@skyux/router';
 
+import {
+  SkyAlertModule
+} from '@skyux/indicators';
+
 @NgModule({
-  imports: [
-    SkyAppLinkModule
-  ],
   exports: [
-    SkyAppLinkModule
+    SkyAppLinkModule,
+    SkyAlertModule
   ]
 })
 export class AppSkyModule { }
