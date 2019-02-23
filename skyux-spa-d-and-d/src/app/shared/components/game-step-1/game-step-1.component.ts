@@ -7,9 +7,9 @@ import {
 import { Character } from '../../models';
 
 @Component({
-  selector: 'app-game-step',
-  templateUrl: './game-step.component.html',
-  styleUrls: ['./game-step.component.scss']
+  selector: 'app-game-step-1',
+  templateUrl: './game-step-1.component.html',
+  styleUrls: ['./game-step-1.component.scss']
 })
 export class GameStepComponent implements OnInit {
 
