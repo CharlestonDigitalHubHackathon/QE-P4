@@ -1,6 +1,6 @@
-<h1>Experimental Lab</h1>
+<h2>Experimental Lab</h2>
 
-<div>
+<!-- <div>
   <section>
     <div id="canvasesdiv" style="position:relative; width:400px; height:300px">
       <canvas #layer1
@@ -28,24 +28,41 @@
       </canvas>
     </div>
   </section>
-</div>
+</div> -->
+
+<img src="~/assets/gameimages/Level0.png" [width]="WIDTH">
 
 <p>
-  Body copy
+  You awake to find yourself strapped to a table in some sort of lab. From the exotic equipment surrounding you, you gather
+  you have been taken prisoner aboard the strange spacecraft. You turn your head to see a bizarre alien working busily
+  at a terminal. A crashing sound from the other side of the lab distracts the alien. Whil its back is turned you wriggle
+  free from your bonds and leap off the table.
 </p>
+<p>
+  There are two doors in front of you that appear to lead out of the lab.
+</p>
+<p *ngIf="character.literate">
+  A sign over one doorway says 'Exit.' A sign over the other doorway reads 'De-atomizing Chamber.'
+</p>
+
+<sky-alert
+  *ngIf="!character.literate"
+  alertType="warning">
+  Your character is illiterate. You will not be able to read any of the text you come across.
+</sky-alert>
 
 <sky-action-button-container>
   <sky-action-button
     *ngFor="let choice of choices"
-    (actionClick)="makeChoice()">
+    (actionClick)="makeChoice(choice.id)">
     <sky-action-button-icon
-      iconType="filter">
+      [iconType]="choice.icon">
     </sky-action-button-icon>
     <sky-action-button-header>
-      Build a new list
+      {{ choice.name }}
     </sky-action-button-header>
     <sky-action-button-details>
-      Start from scratch and fine-tune with filters
+      {{ choice.description }}
     </sky-action-button-details>
   </sky-action-button>
 </sky-action-button-container>
