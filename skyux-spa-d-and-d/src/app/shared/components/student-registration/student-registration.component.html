@@ -30,7 +30,7 @@
         class="sky-form-control"
         id="student-registration-name"
         type="text"
-        placeholder="Ex: asdf asdf"
+        placeholder="Ex: Bobby Earl"
         aria-required="true"
         required>
     </p>
@@ -40,15 +40,22 @@
         class="sky-control-label sky-control-label-required">
         {{ 'student_registration_form_character' | skyAppResources }}
       </label>
+      <span *ngIf="selectedLocation">
+        {{ selectedLocation.name }}
+      </span>
+      <span *ngIf="selectedCharacter">
+        - {{ selectedCharacter.name }}
+      </span>
     </p>
     <agm-map
       id="student-registration-character"
-      [latitude]="lat"
-      [longitude]="lng"
+      [zoom]="2"
       [streetViewControl]="false">
       <agm-marker
-        [latitude]="lat"
-        [longitude]="lng">
+        *ngFor="let location of locations"
+        [latitude]="location.latitude"
+        [longitude]="location.longitude"
+        (markerClick)="markerClick(location, index)">
       </agm-marker>
     </agm-map>
     <p>

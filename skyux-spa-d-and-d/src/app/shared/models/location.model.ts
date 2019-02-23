@@ -1,6 +1,5 @@
-export enum Location {
-  CHINA = 'China',
-  MEXICO = 'Mexico',
-  UNITED_STATES = 'United States',
-  ZIMBABWE = 'Zimbabwe'
+export interface Location {
+  name: string;
+  latitude: number;
+  longitude: number;
 }
