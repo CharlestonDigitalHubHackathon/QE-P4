@@ -25,6 +25,9 @@ import {
   SkyWaitService
 } from '@skyux/indicators';
 
+import {
+  WishlistComponent
+} from './shared/components/wishlist/wishlist.component';
 
 @NgModule({
   imports: [
@@ -44,6 +47,8 @@ import {
     GameService,
     WishlistService
   ],
-  entryComponents: []
+  entryComponents: [
+    WishlistComponent
+  ]
 })
 export class AppExtrasModule { }

@@ -1,1 +1,28 @@
-{{ money | currency }}
+<p>
+  <button
+    type="button"
+    class="sky-btn sky-btn-secondary"
+    (click)="showWishlist()">
+    {{ money | currency }} (Toggle Wishlist)
+  </button>
+</p>
+
+<div *ngIf="isWishlistOpen">
+  <h2>Amazon Wishlist</h2>
+  <sky-card
+    *ngFor="let item of wishlist">
+    <sky-card-title>
+      {{ item.name }}
+    </sky-card-title>
+    <sky-card-content>
+      <img [src]="item.picture" />
+    </sky-card-content>
+    <sky-card-actions>
+      <button
+        type="button"
+        class="sky-btn sky-btn-secondary">
+        Buy
+      </button>
+    </sky-card-actions>
+  </sky-card>
+</div>

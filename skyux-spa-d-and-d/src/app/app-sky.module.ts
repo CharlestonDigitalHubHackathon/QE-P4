@@ -16,13 +16,18 @@ import {
   SkyDefinitionListModule
 } from '@skyux/layout';
 
+import {
+  SkyModalModule
+} from '@skyux/modals';
+
 @NgModule({
   exports: [
     SkyAppLinkModule,
     SkyAlertModule,
     SkyActionButtonModule,
     SkyCardModule,
-    SkyDefinitionListModule
+    SkyDefinitionListModule,
+    SkyModalModule
   ]
 })
 export class AppSkyModule { }
