@@ -23,6 +23,9 @@ export class GameStep4Component implements OnInit {
   public button1Pressed = false;
   public button2Pressed = false;
   public button3Pressed = false;
+  public button4Pressed = false;
+
+  private clampEngaged = true;
 
   constructor(
     private gameService: GameService
@@ -64,6 +67,10 @@ export class GameStep4Component implements OnInit {
         ];
 
       });
+
+    this.gameService.dockingClamp.subscribe((engaged) => {
+      this.clampEngaged = engaged;
+    })
   }
 
   public makeChoice(id: number) {
@@ -81,10 +88,14 @@ export class GameStep4Component implements OnInit {
         break;
       case 4:
         if (this.button1Pressed && this.button2Pressed && this.button3Pressed) {
-          this.gameService.wonTheGame.next(true);
+          if (this.clampEngaged) {
+            this.gameService.isDead.next(true);
+            this.gameService.deathText.next('The space shuttle springs to life, but lurches suddenly. You hear a loud metallic ripping and look back to see the back half of the shuttle, now torn from the rest of the ship, just before the shuttle explodes. You feel a warming sensation as your body is engulfed by the flames');
+          } else {
+            this.gameService.wonTheGame.next(true);
+          }
         } else {
-          this.gameService.isDead.next(true);
-          this.gameService.deathText.next('The springs to life, but launches suddenly. You hear a loud metallic ripping and look back to see the back half of the shuttle, now torn from the rest of the ship, just before the shuttle explodes. You feel a warming sensation as your body is engulfed by the flames');
+          this.button4Pressed = true;
         }
     }
   }

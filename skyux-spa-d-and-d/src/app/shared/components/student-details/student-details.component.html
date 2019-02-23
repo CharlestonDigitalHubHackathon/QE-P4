@@ -4,6 +4,10 @@
     <img src="~/assets/gameimages/Level0.png" width="600px">
 
   <p>
+      You are walking down the street near your home when you hear a loud humming sound and the street around you is suddenly cast into shadow. You look up to see a flying saucer overhead shoot a glowing beam at you. Before you can react, the glowing beam encases you and you are lifted off the ground. Your vision goes dark as your body is hurdled towards the alien spacecraft.
+  </p>
+
+  <p>
     <button
       type="button"
       class="sky-btn sky-btn-primary"
@@ -15,7 +19,7 @@
 
 </div>
 
-<div *ngIf="!characterIsDead && gameStarted">
+<div *ngIf="!characterIsDead && gameStarted && !youWon">
   <app-game-step-1 *ngIf="currentStep === 1">
   </app-game-step-1>
 
@@ -28,13 +32,17 @@
 
   <app-game-step-4 *ngIf="currentStep === 4">
     </app-game-step-4>
+
+
+  <app-game-step-5 *ngIf="currentStep === 5">
+    </app-game-step-5>
 </div>
 
 <div *ngIf="characterIsDead">
   <h3>
     You're dead!
   </h3>
-  <img src="~/assets/gameimages/DeathScreen.png" width="400px">
+  <img src="~/assets/gameimages/DeathScreen.png" width="600px">
   <p>
     {{ deathText }}
   </p>
@@ -47,6 +55,8 @@
     Try Again
   </button>
 </p>
+
+</div>
 
 <div *ngIf="youWon">
   <h3>
@@ -67,8 +77,6 @@
     (click)="tryAgain()">
     Try Again
   </button>
-</div>
-
 </div>
 
 <app-money-meter>
