@@ -16,7 +16,8 @@ import {
 
 import {
   CharacterService,
-  StudentService
+  StudentService,
+  GameService
 } from './shared/services';
 
 import {
@@ -38,7 +39,8 @@ import {
   providers: [
     CharacterService,
     StudentService,
-    SkyWaitService
+    SkyWaitService,
+    GameService
   ],
   entryComponents: []
 })
