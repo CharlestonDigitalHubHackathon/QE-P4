@@ -22,7 +22,7 @@ export class GameStep5Component implements OnInit {
 
   public WIDTH = 600;
 
-  public clampEngaged = false;
+  public clampEngaged = true;
 
   constructor(
     private gameService: GameService

@@ -25,7 +25,7 @@ export class GameStep4Component implements OnInit {
   public button3Pressed = false;
   public button4Pressed = false;
 
-  private clampEngaged = false;
+  private clampEngaged = true;
 
   constructor(
     private gameService: GameService

@@ -45,7 +45,7 @@ export class StudentDetailsComponent implements OnInit {
     this.gameService.isDead.next(false);
     this.gameService.gameStep.next(1);
     this.gameService.wonTheGame.next(false);
-    this.gameService.dockingClamp.next(false);
+    this.gameService.dockingClamp.next(true);
     this.gameStarted = false;
   }
 
