@@ -63,7 +63,7 @@ export class GameStep5Component implements OnInit {
     console.log('Choice made: ' + JSON.stringify(choice));
     switch (id) {
       case 1:
-        this.gameService.dockingClamp.next(true);
+        this.gameService.dockingClamp.next(false);
         this.gameService.gameStep.next(3);
         this.gameService.money.next(5);
         break;
