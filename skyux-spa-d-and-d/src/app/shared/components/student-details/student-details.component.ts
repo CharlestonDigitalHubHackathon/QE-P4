@@ -45,6 +45,7 @@ export class StudentDetailsComponent implements OnInit {
     this.gameService.isDead.next(false);
     this.gameService.gameStep.next(1);
     this.gameService.wonTheGame.next(false);
+    this.gameService.dockingClamp.next(false);
     this.gameStarted = false;
   }
 
@@ -78,6 +79,7 @@ export class StudentDetailsComponent implements OnInit {
     });
 
     this.gameService.wonTheGame.subscribe((won) => {
+      console.log('You WON!');
       this.youWon = won;
     });
   }

@@ -15,7 +15,7 @@
 
 </div>
 
-<div *ngIf="!characterIsDead && gameStarted">
+<div *ngIf="!characterIsDead && gameStarted && !youWon">
   <app-game-step-1 *ngIf="currentStep === 1">
   </app-game-step-1>
 
@@ -28,6 +28,10 @@
 
   <app-game-step-4 *ngIf="currentStep === 4">
     </app-game-step-4>
+
+
+  <app-game-step-5 *ngIf="currentStep === 5">
+    </app-game-step-5>
 </div>
 
 <div *ngIf="characterIsDead">
@@ -48,6 +52,8 @@
   </button>
 </p>
 
+</div>
+
 <div *ngIf="youWon">
   <h3>
     You won!
@@ -67,8 +73,6 @@
     (click)="tryAgain()">
     Try Again
   </button>
-</div>
-
 </div>
 
 <app-money-meter>

@@ -1,0 +1,32 @@
+<h2>Inspect the Glowing Red Button</h2>
+
+<img src="~/assets/gameimages/Level3.png" [width]="WIDTH">
+
+<p>
+    You approach the control panel with the red button. It glows ominously at you. In the still quiet of the shuttle bay, you think you hear it crackling faintly, as if it holds a latent energy beneath its surface.
+</p>
+<p>
+    A sign above the button reads <span *ngIf="character.literate">Docking Clamp <span *ngIf="clampEngaged">ENGAGED</span><span *ngIf="!clampEngaged">DISENGAGED</span></span><span *ngIf="!character.literate">Hsgomrk Gpeqt IRKEKIH</span>.
+</p>
+
+<sky-alert
+  *ngIf="!character.literate"
+  alertType="warning">
+  Your character is illiterate. You will not be able to read any of the text you come across.
+</sky-alert>
+
+<sky-action-button-container>
+  <sky-action-button
+    *ngFor="let choice of choices"
+    (actionClick)="makeChoice(choice.id)">
+    <sky-action-button-icon
+      [iconType]="choice.icon">
+    </sky-action-button-icon>
+    <sky-action-button-header>
+      {{ choice.name }}
+    </sky-action-button-header>
+    <sky-action-button-details>
+      {{ choice.description }}
+    </sky-action-button-details>
+  </sky-action-button>
+</sky-action-button-container>
