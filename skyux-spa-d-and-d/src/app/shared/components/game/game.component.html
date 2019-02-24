@@ -4,7 +4,7 @@
   <img src="~/assets/gameimages/Level0.png" width="600px">
 
   <p>
-      You are walking down the street near your home when you hear a loud humming sound and the street around you is suddenly cast into shadow. You look up to see a flying saucer overhead shoot a glowing beam at you. Before you can react, the glowing beam encases you and you are lifted off the ground. Your vision goes dark as your body is hurdled towards the alien spacecraft.
+      You are walking down the street near your home when you hear a loud humming sound and the street around you is suddenly cast into shadow. You look up to see a flying saucer overhead shoot a glowing beam at you. Before you can react, the glowing beam encases you and you are lifted off the ground. Your vision goes dark as your body is hurtled towards the alien spacecraft.
   </p>
 
   <p>
@@ -20,8 +20,14 @@
 
 <div *ngIf="!characterIsDead && gameStarted && !youWon">
 
+  <app-game-step-0 *ngIf="currentStep === 0">
+  </app-game-step-0>
+
   <app-game-step-1 *ngIf="currentStep === 1">
   </app-game-step-1>
+
+  <app-game-step-2 *ngIf="currentStep === 2">
+  </app-game-step-2>
 
   <app-game-step-3 *ngIf="currentStep === 3">
   </app-game-step-3>

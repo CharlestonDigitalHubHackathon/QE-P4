@@ -10,9 +10,9 @@ import {
   GameService
 } from '../../services';
 
-import {
-  WishItem
-} from '../../models';
+// import {
+//   WishItem
+// } from '../../models';
 
 import {
   WishlistComponent
@@ -31,7 +31,7 @@ export class MoneyMeterComponent implements OnInit {
     private gameService: GameService,
     private modalService: SkyModalService
   ) {
-    this.gameService.money.next(2);
+    // this.gameService.money.next(2);
   }
 
   public ngOnInit() {

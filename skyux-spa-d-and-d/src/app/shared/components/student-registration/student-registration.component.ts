@@ -14,13 +14,16 @@ import {
 
 import {
   CharacterService,
-  StudentService
+  StudentService,
+  GameService
 } from '../../services';
 
 import {
   Location,
-  Student
+  Student,
+  DatabaseCharacter
 } from '../../models';
+import { CharacterState } from '../../models/character-state';
 
 @Component({
   selector: 'app-student-registration',
@@ -42,7 +45,8 @@ export class StudentRegistrationComponent implements OnInit {
   constructor(
     private skyAppConfig: SkyAppConfig,
     private characterService: CharacterService,
-    private studentService: StudentService
+    private studentService: StudentService,
+    private gameService: GameService
   ) {}
 
   public ngOnInit() {
@@ -68,8 +72,10 @@ export class StudentRegistrationComponent implements OnInit {
     const student: Student = {
       HS_Name: this.registrationForm.controls.name.value,
       HS_Share_Key: this.skyAppConfig.runtime.params.get('tid'),
-      HS_Character_ID: JSON.stringify(this.selectedCharacter),
-      character: this.selectedCharacter
+      // Characters: [
+      //   DatabaseCharacter.fromCharacter(this.selectedCharacter, 'Not Started', ??)
+      // ]
+      // HS_Character_ID: JSON.stringify(this.selectedCharacter)
     };
 
     this.error = '';
@@ -78,7 +84,19 @@ export class StudentRegistrationComponent implements OnInit {
       .add(student)
       .subscribe(
         (studentAdded: Student) => {
-          this.studentService.play(studentAdded);
+
+          console.log(JSON.stringify(studentAdded));
+          console.log('adding character str ' + JSON.stringify(this.selectedCharacter));
+
+          this.studentService.addCharacter(studentAdded, CharacterState.NotPlaying, this.selectedCharacter)
+            .subscribe((dbCharacter: DatabaseCharacter) => {
+              this.studentService.play(studentAdded);
+              this.gameService.character.next(DatabaseCharacter.toCharacter(dbCharacter));
+            },
+            (err: any) => {
+              this.error = err;
+            });
+
         },
         (err: any) => {
           this.error = err;

@@ -21,6 +21,8 @@ import {
 import {
   Student
 } from '../models/student.model';
+import { Character, DatabaseCharacter } from '../models';
+import { CharacterState } from '../models/character-state';
 
 @Injectable()
 export class StudentService {
@@ -41,6 +43,18 @@ export class StudentService {
 
   public add(student: Student): Observable<Student> {
     return this.http.post<Student>(`${this.bff}/student`, student);
+  }
+
+  public addCharacter(student: Student, status: CharacterState, character: Character): Observable<DatabaseCharacter> {
+    return this.http.post<DatabaseCharacter>(
+      `${this.bff}/student/${student.HS_ID}/character`,
+      DatabaseCharacter.fromCharacter(character, status, student.HS_ID));
+  }
+
+  public updateCharacter(student: Student, status: CharacterState, character: Character): Observable<DatabaseCharacter> {
+    return this.http.patch<DatabaseCharacter>(
+      `${this.bff}/character/${character.HC_ID}`,
+      DatabaseCharacter.fromCharacter(character, status, student.HS_ID));
   }
 
   public play(student: Student) {

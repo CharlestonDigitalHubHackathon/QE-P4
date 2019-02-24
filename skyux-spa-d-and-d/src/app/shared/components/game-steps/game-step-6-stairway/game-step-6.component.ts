@@ -6,6 +6,7 @@ import {
 } from '@angular/core';
 import { Character } from '../../../models';
 import { GameService } from '../../../services';
+import { CharacterState } from '../../../models/character-state';
 
 @Component({
   selector: 'app-game-step-6',
@@ -55,7 +56,7 @@ export class GameStep6Component implements OnInit {
     switch (id) {
       case 1:
         this.gameService.gameStep.next(3);
-        this.gameService.money.next(4);
+        this.gameService.addMoney(1);
         break;
       case 2:
         this.gameService.characterState.next(CharacterState.Failure);

@@ -1,5 +1,29 @@
+import { CharacterState } from './character-state';
+
+export class DatabaseCharacter {
+  HC_ID?: string;
+  HC_Data: string;
+  HC_StudentID: string;
+  HC_Status: string;
+
+  public static fromCharacter(character: Character, status: CharacterState, studentId: string): DatabaseCharacter {
+    return {
+      HC_Data: JSON.stringify(character),
+      HC_Status: status.toString(),
+      HC_StudentID: studentId
+    };
+  }
+
+  public static toCharacter(dbCharacter: DatabaseCharacter): Character {
+    console.log('toCharacter: ' + JSON.stringify(dbCharacter));
+    let character = JSON.parse(dbCharacter.HC_Data);
+    character.HC_ID = dbCharacter.HC_ID;
+    return character;
+  }
+}
+
 export interface Character {
-  HS_ID?: string;
+  HC_ID?: string;
   country: string;
   age: number;
   gender: string;

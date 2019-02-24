@@ -21,7 +21,7 @@ TODO summary
 * `npm install`
 * `skyux serve`
 
-https://host.nxt.blackbaud.com/d-and-d/student/details/41969c00-37d2-11e9-aae2-1b3fcf2698ef?tid=example-teacher-id
+https://host.nxt.blackbaud.com/d-and-d/student/details/5ca44550-3841-11e9-883b-f50d9fac2eb1?tid=example-teacher-id
 
 ### Character creation Lambda
 

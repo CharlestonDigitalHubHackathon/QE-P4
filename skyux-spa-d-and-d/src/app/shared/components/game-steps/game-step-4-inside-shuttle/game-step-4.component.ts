@@ -6,6 +6,7 @@ import {
 } from '@angular/core';
 import { Character } from '../../../models';
 import { GameService } from '../../../services';
+import { CharacterState } from '../../../models/character-state';
 
 @Component({
   selector: 'app-game-step-4',
@@ -93,7 +94,7 @@ export class GameStep4Component implements OnInit {
             this.gameService.deathText.next('The space shuttle springs to life, but lurches suddenly. You hear a loud metallic ripping and look back to see the back half of the shuttle, now torn from the rest of the ship, just before the shuttle explodes. You feel a warming sensation as your body is engulfed by the flames');
           } else {
             this.gameService.characterState.next(CharacterState.Success);
-            this.gameService.money.next(10);
+            this.gameService.addMoney(5);
           }
         } else {
           this.button4Pressed = true;

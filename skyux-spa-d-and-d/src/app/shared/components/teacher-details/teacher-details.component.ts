@@ -24,9 +24,9 @@ export class TeacherDetailsComponent implements OnInit {
       .subscribe((students: Student[]) => {
 
         // :-(
-        students.forEach((student: Student) => {
-          student.HS_Character_Data = JSON.parse(student.HS_Character_ID);
-        });
+        // students.forEach((student: Student) => {
+        //   student.HS_Character_Data = JSON.parse(student.HS_Character_ID);
+        // });
 
         this.students = students;
       });

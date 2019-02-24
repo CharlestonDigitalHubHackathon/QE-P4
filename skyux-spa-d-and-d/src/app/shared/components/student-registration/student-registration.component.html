@@ -60,6 +60,7 @@
     </agm-map>
     <p>
       <button
+        [disabled]="!selectedCharacter"
         type="submit"
         class="sky-btn sky-btn-primary">
         {{ 'student_registration_form_submit' | skyAppResources }}

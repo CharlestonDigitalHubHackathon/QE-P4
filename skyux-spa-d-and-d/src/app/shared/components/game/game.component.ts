@@ -2,6 +2,7 @@ import {
   Component, OnInit,
 } from '@angular/core';
 import { GameService } from '../../services';
+import { CharacterState } from '../../models/character-state';
 
 @Component({
   selector: 'app-game',
@@ -26,6 +27,7 @@ export class GameComponent implements OnInit {
     this.gameService.characterState.subscribe((state: CharacterState) => {
       this.characterIsDead = state === CharacterState.Failure;
       this.youWon = state === CharacterState.Success;
+      this.gameStarted = state === CharacterState.InGame;
     });
 
     this.gameService.deathText.subscribe((text: string) => {
@@ -36,7 +38,6 @@ export class GameComponent implements OnInit {
 
   public startGame() {
     console.log('Starting the game');
-    this.gameStarted = true;
     this.gameService.gameStep.next(1);
     this.gameService.characterState.next(CharacterState.InGame);
   }
@@ -46,7 +47,6 @@ export class GameComponent implements OnInit {
     this.gameService.gameStep.next(1);
     this.gameService.characterState.next(CharacterState.NotPlaying);
     this.gameService.dockingClamp.next(true);
-    this.gameStarted = false;
   }
 
 }

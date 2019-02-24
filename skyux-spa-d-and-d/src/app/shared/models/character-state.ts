@@ -1,7 +1,6 @@
-
-enum CharacterState {
-  NotPlaying,
-  InGame,
-  Success,
-  Failure
+export enum CharacterState {
+  NotPlaying = 'NotPlaying',
+  InGame = 'InGame',
+  Success = 'Success',
+  Failure = 'Failure'
 }

@@ -6,14 +6,13 @@ import {
 } from '@angular/core';
 import { Character } from '../../../models';
 import { GameService } from '../../../services';
-import { CharacterState } from '../../../models/character-state';
 
 @Component({
-  selector: 'app-game-step-1',
-  templateUrl: './game-step-1.component.html',
-  styleUrls: ['./game-step-1.component.scss']
+  selector: 'app-game-step-2',
+  templateUrl: './game-step-2.component.html',
+  styleUrls: ['./game-step-2.component.scss']
 })
-export class GameStep1Component implements OnInit {
+export class GameStep2Component implements OnInit {
 
   private character: Character;
 
@@ -39,25 +38,16 @@ export class GameStep1Component implements OnInit {
           {
             id: 1,
             icon: 'arrow-circle-o-left',
-            name: this.character.literate ? 'Exit' : this.caesarShift('Exit', this.SHIFT_NUM),
-            description: 'Door 1'
+            name: this.character.literate ? 'Shuttle Bay, Bridge' : this.caesarShift('Shuttle Bay, Bridge', this.SHIFT_NUM),
+            description: 'Go Left'
           },
           {
             id: 2,
             icon: 'arrow-circle-o-right',
-            name: this.character.literate ? 'De-atomizer' : this.caesarShift('De-atomizer', this.SHIFT_NUM),
-            description: 'Door 2'
+            name: this.character.literate ? 'Engineering Bay' : this.caesarShift('Engineering Bay', this.SHIFT_NUM),
+            description: 'Go Right'
           }
         ];
-
-        if (this.character.inventory.findIndex(i => i.name === 'wrench') >= 0) {
-          this.choices.push({
-            id: 3,
-            icon: 'wrench',
-            name: 'Throw wrench at the alien',
-            description: ''
-          });
-        }
 
       });
   }
@@ -67,18 +57,13 @@ export class GameStep1Component implements OnInit {
     console.log('Choice made: ' + JSON.stringify(choice));
     switch (id) {
       case 1:
-        this.gameService.gameStep.next(2);
-        // Shortcut for presentations
-        // this.gameService.gameStep.next(6);
+        this.gameService.gameStep.next(6);
         this.gameService.addMoney(1);
         break;
       case 2:
-        this.gameService.characterState.next(CharacterState.Failure);
-        this.gameService.deathText.next('you open the door and find yourself in a small chamber. The door closes behind you and a voice from a speaker says, "De-Atomizer Engaged." You feel a slight pinching sensation as all all the atoms of your body disintegrate. ');
-        break;
-      case 3:
-        this.gameService.characterState.next(CharacterState.Failure);
-        this.gameService.deathText.next('The wrench strikes the alien in the back of its "head." It emits a gutteral howl and turns to face you. It pulls a strange contraption from its belt and aims it at you. You feel a tickling sensation as your body is flooded with electric current. The alien then jettisons your lifeless body out the airlock.');
+        // TODO Electrified Corridor
+        this.gameService.gameStep.next(0);
+        this.gameService.addMoney(1);
         break;
     }
   }

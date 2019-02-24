@@ -4,8 +4,9 @@ import {
   OnInit
 } from '@angular/core';
 
-import { Student, Character } from '../../models';
+import { Student, Character, DatabaseCharacter } from '../../models';
 import { StudentService, GameService } from '../../services';
+import { CharacterState } from '../../models/character-state';
 
 @Component({
   selector: 'app-student-details',
@@ -18,6 +19,7 @@ export class StudentDetailsComponent implements OnInit {
   public sid: string;
 
   public student: Student;
+  public character: Character;
 
   constructor (
     private studentService: StudentService,
@@ -29,13 +31,28 @@ export class StudentDetailsComponent implements OnInit {
       .get(this.sid)
       .subscribe((student: Student) => {
         this.student = student;
-        console.log(student);
-        if (!this.student.character) {
-          this.student.character = <Character>JSON.parse(this.student.HS_Character_ID);
-          console.log(JSON.stringify(this.student.character));
-          this.gameService.character.next(this.student.character);
+
+        console.log('student str: ' + JSON.stringify(student));
+
+        if (this.gameService.character.value === undefined) {
+          let dbCharacter = this.student.Characters.find((c) => {
+            return (
+              (<any>CharacterState)[c.HC_Status] === CharacterState.NotPlaying
+              || (<any>CharacterState)[c.HC_Status] === CharacterState.InGame
+            )
+            && c.HC_Data !== undefined;
+          });
+          if (dbCharacter === undefined) {
+            console.error('TODO: No active character');
+          }
+          this.gameService.character.next(DatabaseCharacter.toCharacter(dbCharacter));
         }
       });
+    this.gameService.character
+      .subscribe((character: Character) => {
+        this.character = character;
+      });
+
   }
 
 }
