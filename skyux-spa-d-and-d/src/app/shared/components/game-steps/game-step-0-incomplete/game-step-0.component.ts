@@ -20,7 +20,7 @@ export class GameStep0Component {
   public tryAgain() {
     console.log('Try again');
     this.gameService.gameStep.next(1);
-    this.gameService.characterState.next(CharacterState.NotPlaying);
+    this.gameService.updateCharacterState(CharacterState.NotPlaying, undefined);
     this.gameService.dockingClamp.next(true);
   }
 

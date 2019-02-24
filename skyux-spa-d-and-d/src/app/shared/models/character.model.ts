@@ -9,11 +9,11 @@ export class DatabaseCharacter {
   public HC_Status: string;
   /* tslint:enable:variable-name */
 
-  public static fromCharacter(character: Character, status: CharacterState, studentId: string): DatabaseCharacter {
+  public static fromCharacter(character: Character, status: CharacterState): DatabaseCharacter {
     return {
       HC_Data: JSON.stringify(character),
       HC_Status: status.toString(),
-      HC_StudentID: studentId
+      HC_StudentID: character.studentId
     };
   }
 
@@ -21,12 +21,14 @@ export class DatabaseCharacter {
     console.log('toCharacter: ' + JSON.stringify(dbCharacter));
     let character = JSON.parse(dbCharacter.HC_Data);
     character.HC_ID = dbCharacter.HC_ID;
+    character.studentId = dbCharacter.HC_StudentID;
     return character;
   }
 }
 
 export interface Character {
   HC_ID?: string;
+  studentId?: string;
   country: string;
   age: number;
   gender: string;

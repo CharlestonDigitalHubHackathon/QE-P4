@@ -5,7 +5,8 @@ import {
 
 import {
   FormGroup,
-  FormControl
+  FormControl,
+  Validators
 } from '@angular/forms';
 
 import {
@@ -40,7 +41,7 @@ export class StudentRegistrationComponent implements OnInit {
   public selectedCharacter: any;
 
   public registrationForm = new FormGroup({
-    name: new FormControl('')
+    name: new FormControl('', Validators.required)
   });
 
   constructor(
@@ -91,9 +92,11 @@ export class StudentRegistrationComponent implements OnInit {
         (studentAdded: Student) => {
 
           console.log(JSON.stringify(studentAdded));
-          console.log('adding character str ' + JSON.stringify(this.selectedCharacter));
 
-          this.studentService.addCharacter(studentAdded, CharacterState.NotPlaying, this.selectedCharacter)
+          this.selectedCharacter.studentId = studentAdded.HS_ID;
+          console.log('adding character ' + JSON.stringify(this.selectedCharacter));
+
+          this.studentService.addCharacter(CharacterState.NotPlaying, this.selectedCharacter)
             .subscribe((dbCharacter: DatabaseCharacter) => {
               this.studentService.play(studentAdded);
               this.gameService.character.next(DatabaseCharacter.toCharacter(dbCharacter));

@@ -45,16 +45,19 @@ export class StudentService {
     return this.http.post<Student>(`${this.bff}/student`, student);
   }
 
-  public addCharacter(student: Student, status: CharacterState, character: Character): Observable<DatabaseCharacter> {
+  public addCharacter(status: CharacterState, character: Character): Observable<DatabaseCharacter> {
     return this.http.post<DatabaseCharacter>(
-      `${this.bff}/student/${student.HS_ID}/character`,
-      DatabaseCharacter.fromCharacter(character, status, student.HS_ID));
+      `${this.bff}/student/${character.studentId}/character`,
+      DatabaseCharacter.fromCharacter(character, status));
   }
 
-  public updateCharacter(student: Student, status: CharacterState, character: Character): Observable<DatabaseCharacter> {
+  public updateCharacter(status: CharacterState, character: Character): Observable<DatabaseCharacter> {
+    console.log(`patching ${this.bff}/character/${character.HC_ID}`);
+    console.log(DatabaseCharacter.fromCharacter(character, status));
+    console.log('Body: ' + JSON.stringify(DatabaseCharacter.fromCharacter(character, status)));
     return this.http.patch<DatabaseCharacter>(
       `${this.bff}/character/${character.HC_ID}`,
-      DatabaseCharacter.fromCharacter(character, status, student.HS_ID));
+      DatabaseCharacter.fromCharacter(character, status));
   }
 
   public play(student: Student) {

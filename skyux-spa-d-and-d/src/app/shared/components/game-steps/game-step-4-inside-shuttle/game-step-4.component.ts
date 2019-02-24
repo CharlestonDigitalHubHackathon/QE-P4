@@ -90,9 +90,9 @@ export class GameStep4Component implements OnInit {
           if (this.clampEngaged) {
             this.gameService.characterState.next(CharacterState.Failure);
             /* tslint:disable-next-line:max-line-length */
-            this.gameService.deathText.next('The space shuttle springs to life, but lurches suddenly. You hear a loud metallic ripping and look back to see the back half of the shuttle, now torn from the rest of the ship, just before the shuttle explodes. You feel a warming sensation as your body is engulfed by the flames');
+            this.gameService.updateCharacterState(CharacterState.Failure, 'The space shuttle springs to life, but lurches suddenly. You hear a loud metallic ripping and look back to see the back half of the shuttle, now torn from the rest of the ship, just before the shuttle explodes. You feel a warming sensation as your body is engulfed by the flames.');
           } else {
-            this.gameService.characterState.next(CharacterState.Success);
+            this.gameService.updateCharacterState(CharacterState.Success, undefined);
             this.gameService.addMoney(5);
           }
         } else {

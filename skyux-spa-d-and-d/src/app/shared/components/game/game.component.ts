@@ -37,7 +37,7 @@ export class GameComponent implements OnInit {
       this.gameStarted = state === CharacterState.InGame;
     });
 
-    this.gameService.deathText.subscribe((text: string) => {
+    this.gameService.characterStateText.subscribe((text: string) => {
       this.deathText = text;
     });
 
@@ -46,13 +46,13 @@ export class GameComponent implements OnInit {
   public startGame() {
     console.log('Starting the game');
     this.gameService.gameStep.next(1);
-    this.gameService.characterState.next(CharacterState.InGame);
+    this.gameService.updateCharacterState(CharacterState.InGame, undefined);
   }
 
   public tryAgain() {
     console.log('Try again');
     this.gameService.gameStep.next(1);
-    this.gameService.characterState.next(CharacterState.NotPlaying);
+    this.gameService.updateCharacterState(CharacterState.NotPlaying, undefined);
     this.gameService.dockingClamp.next(true);
   }
 

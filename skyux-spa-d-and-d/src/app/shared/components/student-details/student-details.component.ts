@@ -32,7 +32,7 @@ export class StudentDetailsComponent implements OnInit {
       .subscribe((student: Student) => {
         this.student = student;
 
-        console.log('student str: ' + JSON.stringify(student));
+        console.log('student: ' + JSON.stringify(student));
 
         if (this.gameService.character.value === undefined) {
           let dbCharacter = this.student.Characters.find((c) => {

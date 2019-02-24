@@ -60,7 +60,7 @@ export class GameStep6Component implements OnInit {
       case 2:
         this.gameService.characterState.next(CharacterState.Failure);
         /* tslint:disable-next-line:max-line-length */
-        this.gameService.deathText.next('You descend the stairs and enter a room where several more aliens are busy working at control panels and terminals. As you enter, the aliens stop their work and stare at you with looks of surprise. An impressive looking alien sitting in the middle of the room says, "Zoobs, seize the earthling!" Before you can react, two Zoobs grab you and subdue you. You feel a drowsy sensation as you are put to sleep. After the Zoobs are finished with their experiments, they jettison your lifeless body out the airlock.');
+        this.gameService.updateCharacterState(CharacterState.Failure, 'You descend the stairs and enter a room where several more aliens are busy working at control panels and terminals. As you enter, the aliens stop their work and stare at you with looks of surprise. An impressive looking alien sitting in the middle of the room says, "Zoobs, seize the earthling!" Before you can react, two Zoobs grab you and subdue you. You feel a drowsy sensation as you are put to sleep. After the Zoobs are finished with their experiments, they jettison your lifeless body out the airlock.');
         break;
       default:
         console.log('unknown choice');
