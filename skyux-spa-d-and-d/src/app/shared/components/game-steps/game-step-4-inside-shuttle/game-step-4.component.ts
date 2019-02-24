@@ -5,6 +5,8 @@ import {
 import { Character } from '../../../models';
 import { GameService } from '../../../services';
 import { CharacterState } from '../../../models/character-state';
+import { SkyWaitService } from '@skyux/indicators';
+import { SkyAppResourcesService } from '@skyux/i18n';
 
 @Component({
   selector: 'app-game-step-4',
@@ -25,10 +27,16 @@ export class GameStep4Component implements OnInit {
   public button4Pressed = false;
 
   private clampEngaged = true;
+  private clampDeath: string;
 
   constructor(
-    private gameService: GameService
+    private gameService: GameService,
+    private waitSvc: SkyWaitService,
+    private resourcesSvc: SkyAppResourcesService
   ) {
+
+    this.resourcesSvc.getString('game_failure_alien_clamp')
+      .subscribe((s) => this.clampDeath = s);
 
   }
 
@@ -73,8 +81,7 @@ export class GameStep4Component implements OnInit {
   }
 
   public makeChoice(id: number) {
-    const choice = this.choices.find((v) => v.id === id);
-    console.log('Choice made: ' + JSON.stringify(choice));
+    this.waitSvc.beginBlockingPageWait();
     switch (id) {
       case 1:
         this.button1Pressed = true;
@@ -88,11 +95,15 @@ export class GameStep4Component implements OnInit {
       case 4:
         if (this.button1Pressed && this.button2Pressed && this.button3Pressed) {
           if (this.clampEngaged) {
-            this.gameService.characterState.next(CharacterState.Failure);
-            /* tslint:disable-next-line:max-line-length */
-            this.gameService.updateCharacterState(CharacterState.Failure, 'The space shuttle springs to life, but lurches suddenly. You hear a loud metallic ripping and look back to see the back half of the shuttle, now torn from the rest of the ship, just before the shuttle explodes. You feel a warming sensation as your body is engulfed by the flames.');
+            this.gameService.updateCharacterState(CharacterState.Failure, this.clampDeath)
+              .subscribe(() => {
+                this.waitSvc.endBlockingPageWait();
+              });
           } else {
-            this.gameService.updateCharacterState(CharacterState.Success, undefined);
+            this.gameService.updateCharacterState(CharacterState.Success, undefined)
+              .subscribe(() => {
+                this.waitSvc.endBlockingPageWait();
+              });
             this.gameService.addMoney(5);
           }
         } else {

@@ -22,5 +22,54 @@
   },
   "wishlist_buy": {
     "message": "Buy"
+  },
+  "game_failure_alien_deatomizer": {
+    "message": "You open the door and find yourself in a small chamber. The door closes behind you and a voice from a speaker says, \"De-Atomizer Engaged.\" You feel a slight pinching sensation as all all the atoms of your body disintegrate."
+  },
+  "game_failure_alien_wrench": {
+    "message": "The wrench strikes the alien in the back of its \"head.\" It emits a gutteral howl and turns to face you. It pulls a strange contraption from its belt and aims it at you. You feel a tickling sensation as your body is flooded with electric current. The alien then jettisons your lifeless body out the airlock."
+  },
+  "game_failure_alien_clamp": {
+    "message": "The space shuttle springs to life, but lurches suddenly. You hear a loud metallic ripping and look back to see the back half of the shuttle, now torn from the rest of the ship, just before the shuttle explodes. You feel a warming sensation as your body is engulfed by the flames."
+  },
+  "game_failure_alien_jettison": {
+    "message": "You descend the stairs and enter a room where several more aliens are busy working at control panels and terminals. As you enter, the aliens stop their work and stare at you with looks of surprise. An impressive looking alien sitting in the middle of the room says, \"Zoobs, seize the earthling!\" Before you can react, two Zoobs grab you and subdue you. You feel a drowsy sensation as you are put to sleep. After the Zoobs are finished with their experiments, they jettison your lifeless body out the airlock."
+  },
+  "game_choice_alien_health_steps": {
+    "message": "You are severely malnourished. In your weakened state, going up the stairs will cost some of your health."
+  },
+  "game_characterbio_subtitle": {
+    "message": "{0} year old {1} from {2}",
+    "_description": "0: age in years. 1: gender. 2: country."
+  },
+  "game_characterbio_literate": {
+    "message": "You are literate"
+  },
+  "game_characterbio_illiterate": {
+    "message": "You are illiterate"
+  },
+  "game_characterbio_math": {
+    "message": "You understand basic math"
+  },
+  "game_characterbio_nomath": {
+    "message": "You don't understand basic math"
+  },
+  "game_characterbio_notmalnourished": {
+    "message": "You are properly nourished"
+  },
+  "game_characterbio_malnourished": {
+    "message": "You are malnourished"
+  },
+  "game_inventory_title": {
+    "message": "Inventory"
+  },
+  "game_inventory_empty": {
+    "message": "You have no items"
+  },
+  "game_money_title": {
+    "message": "Money"
+  },
+  "game_health_title": {
+    "message": "Health"
   }
 }

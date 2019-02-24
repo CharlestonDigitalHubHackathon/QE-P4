@@ -5,6 +5,8 @@ import {
 import { Character } from '../../../models';
 import { GameService } from '../../../services';
 import { CharacterState } from '../../../models/character-state';
+import { SkyWaitService } from '@skyux/indicators';
+import { SkyAppResourcesService } from '@skyux/i18n';
 
 @Component({
   selector: 'app-game-step-1',
@@ -20,10 +22,19 @@ export class GameStep1Component implements OnInit {
   public choices: any[];
 
   public WIDTH = 600;
+  private deatomizerDeath: string;
+  private wrenchDeath: string;
 
   constructor(
-    private gameService: GameService
+    private gameService: GameService,
+    private waitSvc: SkyWaitService,
+    private resourcesSvc: SkyAppResourcesService
   ) {
+
+    this.resourcesSvc.getString('game_failure_alien_deatomizer')
+      .subscribe((s) => this.deatomizerDeath = s);
+    this.resourcesSvc.getString('game_failure_alien_wrench')
+      .subscribe((s) => this.wrenchDeath = s);
 
   }
 
@@ -61,26 +72,30 @@ export class GameStep1Component implements OnInit {
   }
 
   public makeChoice(id: number) {
+    this.waitSvc.beginBlockingPageWait();
     const choice = this.choices.find((v) => v.id === id);
     console.log('Choice made: ' + JSON.stringify(choice));
     switch (id) {
       case 1:
-        this.gameService.gameStep.next(2);
         // Shortcut for presentations
-        // this.gameService.gameStep.next(6);
-        this.gameService.addMoney(1);
+        // this.gameService.updateGameStep(6)
+        this.gameService.updateGameStep(2)
+          .subscribe(() => {
+            this.gameService.addMoney(1);
+            this.waitSvc.endBlockingPageWait();
+          });
         break;
       case 2:
-        this.gameService.characterState.next(CharacterState.Failure);
-        /* tslint:disable-next-line:max-line-length */
-        this.gameService.updateCharacterState(CharacterState.Failure, 'You open the door and find yourself in a small chamber. The door closes behind you and a voice from a speaker says, "De-Atomizer Engaged." You feel a slight pinching sensation as all all the atoms of your body disintegrate.');
+        this.gameService.updateCharacterState(CharacterState.Failure, this.deatomizerDeath)
+          .subscribe(() => {
+            this.waitSvc.endBlockingPageWait();
+          });
         break;
       case 3:
-        this.gameService.characterState.next(CharacterState.Failure);
-        /* tslint:disable-next-line:max-line-length */
-        this.gameService.updateCharacterState(CharacterState.Failure, 'The wrench strikes the alien in the back of its "head." It emits a gutteral howl and turns to face you. It pulls a strange contraption from its belt and aims it at you. You feel a tickling sensation as your body is flooded with electric current. The alien then jettisons your lifeless body out the airlock.');
-        break;
-      case 3:
+        this.gameService.updateCharacterState(CharacterState.Failure, this.wrenchDeath)
+          .subscribe(() => {
+            this.waitSvc.endBlockingPageWait();
+          });
         break;
       default:
         break;

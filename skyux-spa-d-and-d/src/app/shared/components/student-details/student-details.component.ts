@@ -7,6 +7,7 @@ import {
 import { Student, Character, DatabaseCharacter } from '../../models';
 import { StudentService, GameService } from '../../services';
 import { CharacterState } from '../../models/character-state';
+import { SkyWaitService } from '@skyux/indicators';
 
 @Component({
   selector: 'app-student-details',
@@ -23,10 +24,14 @@ export class StudentDetailsComponent implements OnInit {
 
   constructor (
     private studentService: StudentService,
-    private gameService: GameService
+    private gameService: GameService,
+    private waitSvc: SkyWaitService
   ) {}
 
   public ngOnInit() {
+
+    this.waitSvc.beginBlockingPageWait();
+
     this.studentService
       .get(this.sid)
       .subscribe((student: Student) => {
@@ -45,9 +50,17 @@ export class StudentDetailsComponent implements OnInit {
           if (dbCharacter === undefined) {
             console.error('TODO: No active character');
           }
-          this.gameService.character.next(DatabaseCharacter.toCharacter(dbCharacter));
+          let status = (<any>CharacterState)[dbCharacter.HC_Status];
+          let character = DatabaseCharacter.toCharacter(dbCharacter);
+          this.gameService.character.next(character);
+          if (status === CharacterState.InGame) {
+            this.gameService.gameStep.next(character.step);
+          }
+          this.gameService.characterState.next(status);
+          this.waitSvc.endBlockingPageWait();
         }
       });
+
     this.gameService.character
       .subscribe((character: Character) => {
         this.character = character;

@@ -28,6 +28,7 @@ export class DatabaseCharacter {
 
 export interface Character {
   HC_ID?: string;
+  step?: number;
   studentId?: string;
   country: string;
   age: number;

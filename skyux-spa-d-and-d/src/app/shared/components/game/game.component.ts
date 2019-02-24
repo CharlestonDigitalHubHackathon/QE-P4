@@ -10,6 +10,7 @@ import {
 import {
   CharacterState
 } from '../../models/character-state';
+import { SkyWaitService } from '@skyux/indicators';
 
 @Component({
   selector: 'app-game',
@@ -24,7 +25,10 @@ export class GameComponent implements OnInit {
   public deathText: string;
   public youWon = false;
 
-  constructor(private gameService: GameService) { }
+  constructor(
+    private gameService: GameService,
+    private waitSvc: SkyWaitService
+  ) { }
 
   public ngOnInit() {
     this.gameService.gameStep.subscribe((stepNum) => {
@@ -34,7 +38,7 @@ export class GameComponent implements OnInit {
     this.gameService.characterState.subscribe((state: CharacterState) => {
       this.characterIsDead = state === CharacterState.Failure;
       this.youWon = state === CharacterState.Success;
-      this.gameStarted = state === CharacterState.InGame;
+      this.gameStarted = state === CharacterState.InGame || this.characterIsDead || this.youWon;
     });
 
     this.gameService.characterStateText.subscribe((text: string) => {
@@ -44,16 +48,20 @@ export class GameComponent implements OnInit {
   }
 
   public startGame() {
+    this.waitSvc.beginBlockingPageWait();
     console.log('Starting the game');
-    this.gameService.gameStep.next(1);
-    this.gameService.updateCharacterState(CharacterState.InGame, undefined);
+    this.gameService.startGame()
+      .subscribe(() => {
+        this.waitSvc.endBlockingPageWait();
+      });
   }
 
   public tryAgain() {
-    console.log('Try again');
-    this.gameService.gameStep.next(1);
-    this.gameService.updateCharacterState(CharacterState.NotPlaying, undefined);
-    this.gameService.dockingClamp.next(true);
+    this.waitSvc.beginBlockingPageWait();
+    this.gameService.resetGame()
+      .subscribe(() => {
+        this.waitSvc.endBlockingPageWait();
+      });
   }
 
 }

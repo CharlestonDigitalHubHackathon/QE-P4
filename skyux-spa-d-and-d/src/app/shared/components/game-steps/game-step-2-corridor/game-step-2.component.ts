@@ -4,6 +4,7 @@ import {
 } from '@angular/core';
 import { Character } from '../../../models';
 import { GameService } from '../../../services';
+import { SkyWaitService } from '@skyux/indicators';
 
 @Component({
   selector: 'app-game-step-2',
@@ -21,7 +22,8 @@ export class GameStep2Component implements OnInit {
   public WIDTH = 600;
 
   constructor(
-    private gameService: GameService
+    private gameService: GameService,
+    private waitSvc: SkyWaitService
   ) {
 
   }
@@ -51,17 +53,24 @@ export class GameStep2Component implements OnInit {
   }
 
   public makeChoice(id: number) {
+    this.waitSvc.beginBlockingPageWait();
     const choice = this.choices.find((v) => v.id === id);
     console.log('Choice made: ' + JSON.stringify(choice));
     switch (id) {
       case 1:
-        this.gameService.gameStep.next(6);
-        this.gameService.addMoney(1);
+        this.gameService.updateGameStep(6)
+          .subscribe(() => {
+            this.gameService.addMoney(1);
+            this.waitSvc.endBlockingPageWait();
+          });
         break;
       case 2:
         // TODO Electrified Corridor
-        this.gameService.gameStep.next(0);
-        this.gameService.addMoney(1);
+        this.gameService.updateGameStep(0)
+          .subscribe(() => {
+            this.gameService.addMoney(1);
+            this.waitSvc.endBlockingPageWait();
+          });
         break;
       default:
         break;

@@ -52,12 +52,17 @@ export class StudentService {
   }
 
   public updateCharacter(status: CharacterState, character: Character): Observable<DatabaseCharacter> {
-    console.log(`patching ${this.bff}/character/${character.HC_ID}`);
-    console.log(DatabaseCharacter.fromCharacter(character, status));
-    console.log('Body: ' + JSON.stringify(DatabaseCharacter.fromCharacter(character, status)));
-    return this.http.patch<DatabaseCharacter>(
-      `${this.bff}/character/${character.HC_ID}`,
-      DatabaseCharacter.fromCharacter(character, status));
+    return new Observable<DatabaseCharacter>((obs) => {
+      obs.next(undefined);
+      obs.complete();
+    });
+    // TODO this is broken
+    // console.log(`patching ${this.bff}/character/${character.HC_ID}`);
+    // console.log(DatabaseCharacter.fromCharacter(character, status));
+    // console.log('Body: ' + JSON.stringify(DatabaseCharacter.fromCharacter(character, status)));
+    // return this.http.patch<DatabaseCharacter>(
+    //   `${this.bff}/character/${character.HC_ID}`,
+    //   DatabaseCharacter.fromCharacter(character, status));
   }
 
   public play(student: Student) {

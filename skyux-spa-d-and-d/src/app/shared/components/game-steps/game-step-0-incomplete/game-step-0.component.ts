@@ -2,7 +2,7 @@ import {
   Component
 } from '@angular/core';
 import { GameService } from '../../../services';
-import { CharacterState } from '../../../models/character-state';
+import { SkyWaitService } from '@skyux/indicators';
 
 @Component({
   selector: 'app-game-step-0',
@@ -12,16 +12,18 @@ import { CharacterState } from '../../../models/character-state';
 export class GameStep0Component {
 
   constructor(
-    private gameService: GameService
+    private gameService: GameService,
+    private waitSvc: SkyWaitService
   ) {
 
   }
 
   public tryAgain() {
-    console.log('Try again');
-    this.gameService.gameStep.next(1);
-    this.gameService.updateCharacterState(CharacterState.NotPlaying, undefined);
-    this.gameService.dockingClamp.next(true);
+    this.waitSvc.beginBlockingPageWait();
+    this.gameService.resetGame()
+      .subscribe(() => {
+        this.waitSvc.endBlockingPageWait();
+      });
   }
 
 }

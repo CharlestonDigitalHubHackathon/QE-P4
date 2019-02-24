@@ -1,78 +1,76 @@
-<h3 *ngIf="!character">Loading Character Bio...</h3>
+<div style="border: solid 1px #ccc">
+  <sky-wait [isWaiting]="!character">
+  </sky-wait>
+  <div *ngIf="character">
+  <sky-page-summary>
+    <!-- <sky-page-summary-alert>
+      <sky-alert alertType="info">This is an alert.</sky-alert>
+    </sky-page-summary-alert> -->
+    <sky-page-summary-image>
+      <sky-avatar
+        [name]="character.name"
+        [src]="avatarUrl"
+        [canChange]="false">
+      </sky-avatar>
+    </sky-page-summary-image>
+    <sky-page-summary-title>
+      {{ character.name }}
+    </sky-page-summary-title>
+    <sky-page-summary-subtitle>
+      {{ 'game_characterbio_subtitle' | skyAppResources:character.age:character.gender:character.country }}
+    </sky-page-summary-subtitle>
+    <sky-page-summary-status>
+      <sky-label *ngIf="character.literate">
+        {{ 'game_characterbio_literate' | skyAppResources }}
+      </sky-label>
+      <sky-label labelType="warning" *ngIf="!character.literate">
+        {{ 'game_characterbio_illiterate' | skyAppResources }}
+      </sky-label>
+      <sky-label *ngIf="character.hasBasicMath">
+        {{ 'game_characterbio_math' | skyAppResources }}
+      </sky-label>
+      <sky-label labelType="warning" *ngIf="!character.hasBasicMath">
+        {{ 'game_characterbio_nomath' | skyAppResources }}
+      </sky-label>
+      <sky-label *ngIf="!character.undernourished">
+        {{ 'game_characterbio_notmalnourished' | skyAppResources }}
+      </sky-label>
+      <sky-label labelType="warning" *ngIf="character.undernourished">
+        {{ 'game_characterbio_malnourished' | skyAppResources }}
+      </sky-label>
+    </sky-page-summary-status>
+    <!-- <sky-page-summary-content>
 
-<div *ngIf="character">
-  <div style="border: solid 1px #ccc">
-    <sky-page-summary>
-      <!-- <sky-page-summary-alert>
-        <sky-alert alertType="info">This is an alert.</sky-alert>
-      </sky-page-summary-alert> -->
-      <sky-page-summary-image>
-        <sky-avatar
-          [name]="character.name"
-          [src]="avatarUrl"
-          [canChange]="false">
-        </sky-avatar>
-      </sky-page-summary-image>
-      <sky-page-summary-title>
-        {{ character.name }}
-      </sky-page-summary-title>
-      <sky-page-summary-subtitle>
-        {{ character.age }} year old {{ character.gender }} from {{ character.country }}
-      </sky-page-summary-subtitle>
-      <sky-page-summary-status>
-        <sky-label *ngIf="character.literate">
-          You are literate
-        </sky-label>
-        <sky-label labelType="warning" *ngIf="!character.literate">
-          You are illiterate
-        </sky-label>
-        <sky-label *ngIf="character.hasBasicMath">
-          You understand basic math
-        </sky-label>
-        <sky-label labelType="warning" *ngIf="!character.hasBasicMath">
-          You don't understand basic math
-        </sky-label>
-        <sky-label *ngIf="!character.undernourished">
-          You are properly nourished
-        </sky-label>
-        <sky-label labelType="warning" *ngIf="character.undernourished">
-          You are malnourished
-        </sky-label>
-      </sky-page-summary-status>
-      <sky-page-summary-content>
+      <h4>{{ 'game_inventory_title' | skyAppResources }}</h4>
+      <div *ngIf="character.inventory.length === 0">
+        {{ 'game_inventory_empty' | skyAppResources }}
+      </div>
+      <div *ngIf="character.inventory.length > 0">
+        <ul>
+          <div *ngFor="let item of character.inventory">
+            <li>item.name</li>
+          </div>
+        </ul>
+      </div>
 
-        <h4>Inventory</h4>
-        <div *ngIf="character.inventory.length === 0">
-          You have no items
-        </div>
-        <div *ngIf="character.inventory.length > 0">
-          <ul>
-            <div *ngFor="let item of character.inventory">
-              <li>item.name</li>
-            </div>
-          </ul>
-        </div>
-
-      </sky-page-summary-content>
-      <sky-page-summary-key-info>
-        <sky-key-info>
-          <sky-key-info-value>
-            {{ character.usd | skyNumeric:{digits: 2, format: 'currency', iso: 'USD', truncate: false} }}
-          </sky-key-info-value>
-          <sky-key-info-label>
-            Money
-          </sky-key-info-label>
-        </sky-key-info>
-        <sky-key-info>
-          <sky-key-info-value>
-            Health
-          </sky-key-info-value>
-          <sky-key-info-label>
-            {{ character.baseHealth }}
-          </sky-key-info-label>
-        </sky-key-info>
-      </sky-page-summary-key-info>
-    </sky-page-summary>
-  </div>
-
+    </sky-page-summary-content> -->
+    <sky-page-summary-key-info>
+      <sky-key-info>
+        <sky-key-info-value>
+          {{ character.usd | skyNumeric:{digits: 2, format: 'currency', iso: 'USD', truncate: false} }}
+        </sky-key-info-value>
+        <sky-key-info-label>
+          {{ 'game_money_title' | skyAppResources }}
+        </sky-key-info-label>
+      </sky-key-info>
+      <sky-key-info>
+        <sky-key-info-value>
+          {{ 'game_health_title' | skyAppResources }}
+        </sky-key-info-value>
+        <sky-key-info-label>
+          {{ character.baseHealth }}
+        </sky-key-info-label>
+      </sky-key-info>
+    </sky-page-summary-key-info>
+  </sky-page-summary>
 </div>

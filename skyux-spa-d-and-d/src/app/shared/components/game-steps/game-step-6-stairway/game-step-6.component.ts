@@ -5,6 +5,8 @@ import {
 import { Character } from '../../../models';
 import { GameService } from '../../../services';
 import { CharacterState } from '../../../models/character-state';
+import { SkyWaitService } from '@skyux/indicators';
+import { SkyAppResourcesService } from '@skyux/i18n';
 
 @Component({
   selector: 'app-game-step-6',
@@ -19,9 +21,19 @@ export class GameStep6Component implements OnInit {
 
   public WIDTH = 600;
 
+  private stepHealthWarning: string;
+  private deathJettison: string;
+
   constructor(
-    private gameService: GameService
+    private gameService: GameService,
+    private waitSvc: SkyWaitService,
+    private resourcesSvc: SkyAppResourcesService
   ) {
+
+    this.resourcesSvc.getString('game_choice_alien_health_steps')
+      .subscribe((s) => this.stepHealthWarning = s);
+    this.resourcesSvc.getString('game_failure_alien_jettison')
+      .subscribe((s) => this.deathJettison = s);
 
   }
 
@@ -36,8 +48,7 @@ export class GameStep6Component implements OnInit {
             id: 1,
             icon: 'arrow-circle-o-up',
             name: 'Go up',
-            /* tslint:disable-next-line:max-line-length */
-            description: this.character.undernourished ? 'You are severely malnourished. In your weakened state, going up the stairs will cost some of your health.' : ''
+            description: this.character.undernourished ? this.stepHealthWarning : ''
           },
           {
             id: 2,
@@ -50,17 +61,22 @@ export class GameStep6Component implements OnInit {
   }
 
   public makeChoice(id: number) {
+    this.waitSvc.beginBlockingPageWait();
     const choice = this.choices.find((v) => v.id === id);
     console.log('Choice made: ' + JSON.stringify(choice));
     switch (id) {
       case 1:
-        this.gameService.gameStep.next(3);
-        this.gameService.addMoney(1);
+        this.gameService.updateGameStep(3)
+          .subscribe(() => {
+            this.gameService.addMoney(1);
+            this.waitSvc.endBlockingPageWait();
+          });
         break;
       case 2:
-        this.gameService.characterState.next(CharacterState.Failure);
-        /* tslint:disable-next-line:max-line-length */
-        this.gameService.updateCharacterState(CharacterState.Failure, 'You descend the stairs and enter a room where several more aliens are busy working at control panels and terminals. As you enter, the aliens stop their work and stare at you with looks of surprise. An impressive looking alien sitting in the middle of the room says, "Zoobs, seize the earthling!" Before you can react, two Zoobs grab you and subdue you. You feel a drowsy sensation as you are put to sleep. After the Zoobs are finished with their experiments, they jettison your lifeless body out the airlock.');
+        this.gameService.updateCharacterState(CharacterState.Failure, this.deathJettison)
+          .subscribe(() => {
+            this.waitSvc.endBlockingPageWait();
+          });
         break;
       default:
         console.log('unknown choice');
