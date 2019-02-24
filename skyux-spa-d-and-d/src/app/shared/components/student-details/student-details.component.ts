@@ -31,9 +31,9 @@ export class StudentDetailsComponent implements OnInit {
         this.student = student;
         console.log(student);
         try {
-          var character = <Character>JSON.parse(student.HS_Character_ID);
-          console.log(JSON.stringify(character));
-          this.gameService.character.next(character);
+          this.student.character = <Character>JSON.parse(this.student.HS_Character_ID);
+          console.log(JSON.stringify(this.student.character));
+          this.gameService.character.next(this.student.character);
         } catch (ex) {
           // TODO do something
         }

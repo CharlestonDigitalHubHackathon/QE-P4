@@ -20,6 +20,10 @@ import {
   SkyModalModule
 } from '@skyux/modals';
 
+import {
+  SkyAvatarModule
+} from '@skyux/avatar';
+
 @NgModule({
   exports: [
     SkyAppLinkModule,
@@ -27,7 +31,8 @@ import {
     SkyActionButtonModule,
     SkyCardModule,
     SkyDefinitionListModule,
-    SkyModalModule
+    SkyModalModule,
+    SkyAvatarModule
   ]
 })
 export class AppSkyModule { }
