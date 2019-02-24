@@ -7,7 +7,7 @@ import {
 } from '@skyux/router';
 
 import {
-  SkyAlertModule, SkyLabelModule, SkyKeyInfoModule
+  SkyAlertModule, SkyLabelModule, SkyKeyInfoModule, SkyWaitModule
 } from '@skyux/indicators';
 
 import {
@@ -38,7 +38,8 @@ import { SkyNumericModule } from '@skyux/core';
     SkyNumericModule,
     SkyLabelModule,
     SkyPageSummaryModule,
-    SkyKeyInfoModule
+    SkyKeyInfoModule,
+    SkyWaitModule
   ]
 })
 export class AppSkyModule { }

@@ -39,7 +39,12 @@ export class SkyAvatarDemoComponent implements OnInit {
         throw new Error('dev error unknown location 5: ' + location);
     }
     let gender = this.character.gender === 'female' ? 'Female' : 'Male';
-    this.avatarUrl = this.skyAppAssetsService.getUrl(`avatars/${ethnicity}${gender}.png`);
+
+    // TODO add hispanic female avatar
+    if (ethnicity !== 'Hispanic' && gender != 'Female') {
+      this.avatarUrl = this.skyAppAssetsService.getUrl(`avatars/${ethnicity}${gender}.png`);
+    }
+
   }
 
 }

@@ -24,6 +24,7 @@ import {
   DatabaseCharacter
 } from '../../models';
 import { CharacterState } from '../../models/character-state';
+import { SkyWaitService } from '@skyux/indicators';
 
 @Component({
   selector: 'app-student-registration',
@@ -46,7 +47,8 @@ export class StudentRegistrationComponent implements OnInit {
     private skyAppConfig: SkyAppConfig,
     private characterService: CharacterService,
     private studentService: StudentService,
-    private gameService: GameService
+    private gameService: GameService,
+    private waitSvc: SkyWaitService
   ) {}
 
   public ngOnInit() {
@@ -60,15 +62,18 @@ export class StudentRegistrationComponent implements OnInit {
   }
 
   public markerClick(location: Location, index: number) {
+    this.waitSvc.beginBlockingPageWait();
     this.selectedLocation = location;
     this.characterService
       .getCharacter(location)
       .subscribe((character: any) => {
         this.selectedCharacter = character;
+        this.waitSvc.endBlockingPageWait();
       });
   }
 
   public onSubmit() {
+    this.waitSvc.beginBlockingPageWait();
     const student: Student = {
       HS_Name: this.registrationForm.controls.name.value,
       HS_Share_Key: this.skyAppConfig.runtime.params.get('tid'),
@@ -92,14 +97,17 @@ export class StudentRegistrationComponent implements OnInit {
             .subscribe((dbCharacter: DatabaseCharacter) => {
               this.studentService.play(studentAdded);
               this.gameService.character.next(DatabaseCharacter.toCharacter(dbCharacter));
+              this.waitSvc.endBlockingPageWait();
             },
             (err: any) => {
               this.error = err;
+              this.waitSvc.endBlockingPageWait();
             });
 
         },
         (err: any) => {
           this.error = err;
+          this.waitSvc.endBlockingPageWait();
         }
       );
   }
