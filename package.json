@@ -4,7 +4,8 @@
   "description": "This project was created for the hackathon at the Booz Allen Hamilton Charleston Digital Hub on February 23, 2019.",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon index.js"
+    "start": "node index.js",
+    "start:dev": "nodemon index.js"
   },
   "repository": {
     "type": "git",
