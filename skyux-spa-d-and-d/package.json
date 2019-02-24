@@ -4,7 +4,7 @@
   "description": "Single-page-application for skyux-spa-d-and-d",
   "main": "index.js",
   "engines": {
-    "node": ">=6.11.1"
+    "node": ">=10.15.1"
   },
   "scripts": {
     "skyux": "skyux",
