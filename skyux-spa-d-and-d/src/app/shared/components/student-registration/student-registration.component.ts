@@ -68,7 +68,8 @@ export class StudentRegistrationComponent implements OnInit {
     const student: Student = {
       HS_Name: this.registrationForm.controls.name.value,
       HS_Share_Key: this.skyAppConfig.runtime.params.get('tid'),
-      HS_Character_ID: JSON.stringify(this.selectedCharacter)
+      HS_Character_ID: JSON.stringify(this.selectedCharacter),
+      character: this.selectedCharacter
     };
 
     this.error = '';

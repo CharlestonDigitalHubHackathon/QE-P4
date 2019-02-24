@@ -4,7 +4,7 @@ import {
   OnInit
 } from '@angular/core';
 
-import { Student } from '../../models';
+import { Student, Character } from '../../models';
 import { StudentService, GameService } from '../../services';
 
 @Component({
@@ -22,8 +22,6 @@ export class StudentDetailsComponent implements OnInit {
   public student: Student;
 
   public characterIsDead: boolean;
-
-  public currentStep: number;
 
   public deathText: string;
 
@@ -55,15 +53,13 @@ export class StudentDetailsComponent implements OnInit {
       .subscribe((student: Student) => {
         this.student = student;
         console.log(student);
-        this.gameService.character.next({
-          name: 'Bobby',
-          literate: false,
-          items: [
-            'wrench'
-          ],
-          undernourished: true,
-          hasBasicMath: false
-        });
+        try {
+          var character = <Character>JSON.parse(student.HS_Character_ID);
+          console.log(JSON.stringify(character));
+          this.gameService.character.next(character);
+        } catch (ex) {
+          // TODO do something
+        }
       });
 
     this.gameService.isDead.subscribe((dead: boolean) => {
@@ -72,10 +68,6 @@ export class StudentDetailsComponent implements OnInit {
 
     this.gameService.deathText.subscribe((text: string) => {
       this.deathText = text;
-    });
-
-    this.gameService.gameStep.subscribe((stepNum) => {
-      this.currentStep = stepNum;
     });
 
     this.gameService.wonTheGame.subscribe((won) => {

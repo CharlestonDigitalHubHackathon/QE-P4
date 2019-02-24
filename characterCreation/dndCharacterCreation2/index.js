@@ -120,6 +120,11 @@ function getUndernourished(location) {
 
 }
 
+function getHasBasicMath(location, isFemale) {
+  // TODO pull math stats
+  return getLiterate(location, isFemale);
+}
+
 function getLiterate(location, isFemale) {
 
   var in1000;
@@ -160,7 +165,7 @@ function createCharacter(location) {
   }
 
   var character = {
-      location: location,
+      country: location,
       age: 16
   };
 
@@ -168,6 +173,7 @@ function createCharacter(location) {
   character.gender = isFemale ? 'female' : 'male';
   character.undernourished = getUndernourished(location);
   character.literate = getLiterate(location, isFemale);
+  character.hasBasicMath = getHasBasicMath(location, isFemale);
   character.educationLevel = getEducationLevel(location, isFemale);
   character.baseHealth = getHealth(location);
   character.shop = [
@@ -192,6 +198,7 @@ function createCharacter(location) {
       cost: -1
     }
   ];
+  character.inventory = [];
 
   var names;
 

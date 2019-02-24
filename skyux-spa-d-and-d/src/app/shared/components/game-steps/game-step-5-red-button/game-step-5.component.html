@@ -3,10 +3,12 @@
 <img src="~/assets/gameimages/Level3.png" [width]="WIDTH">
 
 <p>
-    You approach the control panel with the red button. It glows ominously at you. In the still quiet of the shuttle bay, you think you hear it crackling faintly, as if it holds a latent energy beneath its surface.
+  You approach the control panel with the red button. It glows ominously at you. In the still quiet of the shuttle bay, you think you hear it crackling faintly, as if it holds a latent energy beneath its surface.
 </p>
 <p>
-    A sign above the button reads <span *ngIf="character.literate">Docking Clamp <span *ngIf="clampEngaged">ENGAGED</span><span *ngIf="!clampEngaged">DISENGAGED</span></span><span *ngIf="!character.literate">Hsgomrk Gpeqt IRKEKIH</span>.
+  A sign above the button reads
+  <span *ngIf="character.literate">Docking Clamp <span *ngIf="clampEngaged">ENGAGED</span><span *ngIf="!clampEngaged">DISENGAGED</span></span>
+  <span *ngIf="!character.literate">Hsgomrk Gpeqt IRKEKIH</span>.
 </p>
 
 <sky-alert

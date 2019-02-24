@@ -49,13 +49,13 @@ export class GameStep1Component implements OnInit {
           }
         ];
 
-        if (this.character.items.indexOf('wrench') >= 0) {
+        if (this.character.inventory.findIndex(i => i.name === 'wrench') >= 0) {
           this.choices.push({
-              id: 3,
-              icon: 'wrench',
-              name: 'Throw wrench at the alien',
-              description: ''
-            });
+            id: 3,
+            icon: 'wrench',
+            name: 'Throw wrench at the alien',
+            description: ''
+          });
         }
 
       });

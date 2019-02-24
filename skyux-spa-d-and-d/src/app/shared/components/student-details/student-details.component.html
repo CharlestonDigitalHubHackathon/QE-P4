@@ -1,4 +1,4 @@
-<h1>Game Play ({{ sid }})</h1>
+<h1>Game Play ({{ student ? student.HS_Name : sid }})</h1>
 
 <div *ngIf="!gameStarted">
   <img src="~/assets/gameimages/Level0.png" width="600px">
@@ -16,24 +16,10 @@
     </button>
   </p>
 
-
 </div>
 
 <div *ngIf="!characterIsDead && gameStarted && !youWon">
-  <app-game-step-1 *ngIf="currentStep === 1">
-  </app-game-step-1>
-
-  <app-game-step-6 *ngIf="currentStep === 6">
-  </app-game-step-6>
-
-  <app-game-step-3 *ngIf="currentStep === 3">
-  </app-game-step-3>
-
-  <app-game-step-4 *ngIf="currentStep === 4">
-  </app-game-step-4>
-
-  <app-game-step-5 *ngIf="currentStep === 5">
-  </app-game-step-5>
+  <app-game></app-game>
 </div>
 
 <div *ngIf="characterIsDead">
