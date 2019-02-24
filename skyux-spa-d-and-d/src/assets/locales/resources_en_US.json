@@ -13,5 +13,14 @@
   },
   "teacher_details_play": {
     "message": "Play"
+  },
+  "wishlist_view": {
+    "message": "(View Wishlist)"
+  },
+  "wishlist_header": {
+    "message": "Your Teacher's Wishlist"
+  },
+  "wishlist_buy": {
+    "message": "Buy"
   }
 }

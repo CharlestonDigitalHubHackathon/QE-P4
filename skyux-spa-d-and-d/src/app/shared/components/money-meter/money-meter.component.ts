@@ -1,16 +1,22 @@
 import {
   Component, OnInit
 } from '@angular/core';
+
 import {
-  SkyModalService
+  SkyModalService, SkyModalInstance
 } from '@skyux/modals';
 
-import { GameService, WishlistService } from '../../services';
+import {
+  GameService
+} from '../../services';
 
-import { WishItem } from '../../models';
+import {
+  WishItem
+} from '../../models';
 
-import { WishlistComponent } from '../wishlist/wishlist.component';
-import { WishItem } from '../../models/wishitem.model';
+import {
+  WishlistComponent
+} from '../wishlist/wishlist.component';
 
 @Component({
   selector: 'app-money-meter',
@@ -19,13 +25,11 @@ import { WishItem } from '../../models/wishitem.model';
 })
 export class MoneyMeterComponent implements OnInit {
   public money: number;
-  public isWishlistOpen = false;
-  public wishlist: WishItem[];
+  private modal: SkyModalInstance;
 
   constructor(
     private gameService: GameService,
-    private modalService: SkyModalService,
-    private wishlistService: WishlistService
+    private modalService: SkyModalService
   ) {
     this.gameService.money.next(2);
   }
@@ -36,19 +40,15 @@ export class MoneyMeterComponent implements OnInit {
       .subscribe((money: number) => {
         this.money = money;
       });
-
-    this.wishlistService
-      .getItems()
-      .subscribe((wishlist: WishItem[]) => {
-        this.wishlist = wishlist;
-      });
   }
 
   public showWishlist() {
-    this.isWishlistOpen = !this.isWishlistOpen;
-  //  const modal =  this.modalService.open(WishlistComponent);
-  //  modal.closed.subscribe(() => {
-  //    console.log('closed');
-  //  });
+   this.modal = this.modalService.open(WishlistComponent, {
+     size: 'large'
+   });
+
+   this.modal.closed.subscribe(() => {
+     console.log('closed');
+   });
   }
 }
