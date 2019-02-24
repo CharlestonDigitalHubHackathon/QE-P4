@@ -4,7 +4,7 @@ export interface Character {
   gender: string;
   undernourished: boolean;
   literate: boolean;
-  educationLevel: number;
+  // educationLevel: number;
   baseHealth: number;
   shop: ShopItem[];
   usd: number;

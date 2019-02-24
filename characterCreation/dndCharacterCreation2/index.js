@@ -150,9 +150,9 @@ function getLiterate(location, isFemale) {
 
 }
 
-function getEducationLevel(location, isFemale) {
-  return -1;
-}
+// function getEducationLevel(location, isFemale) {
+//   return -1;
+// }
 
 function getHealth(location) {
   return -1;
@@ -174,7 +174,7 @@ function createCharacter(location) {
   character.undernourished = getUndernourished(location);
   character.literate = getLiterate(location, isFemale);
   character.hasBasicMath = getHasBasicMath(location, isFemale);
-  character.educationLevel = getEducationLevel(location, isFemale);
+  // character.educationLevel = getEducationLevel(location, isFemale);
   character.baseHealth = getHealth(location);
   character.shop = [
     {
