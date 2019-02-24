@@ -30,12 +30,10 @@ export class StudentDetailsComponent implements OnInit {
       .subscribe((student: Student) => {
         this.student = student;
         console.log(student);
-        try {
+        if (!this.student.character) {
           this.student.character = <Character>JSON.parse(this.student.HS_Character_ID);
           console.log(JSON.stringify(this.student.character));
           this.gameService.character.next(this.student.character);
-        } catch (ex) {
-          // TODO do something
         }
       });
   }
