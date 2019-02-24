@@ -14,38 +14,15 @@ import { StudentService, GameService } from '../../services';
 })
 export class StudentDetailsComponent implements OnInit {
 
-  public gameStarted = false;
-
   @Input()
   public sid: string;
 
   public student: Student;
 
-  public characterIsDead: boolean;
-
-  public deathText: string;
-
-  public youWon = false;
-
   constructor (
     private studentService: StudentService,
     private gameService: GameService
   ) {}
-
-  public startGame() {
-    console.log('Starting the game');
-    this.gameStarted = true;
-    this.gameService.gameStep.next(1);
-  }
-
-  public tryAgain() {
-    console.log('Try again');
-    this.gameService.isDead.next(false);
-    this.gameService.gameStep.next(1);
-    this.gameService.wonTheGame.next(false);
-    this.gameService.dockingClamp.next(true);
-    this.gameStarted = false;
-  }
 
   public ngOnInit() {
     this.studentService
@@ -61,19 +38,6 @@ export class StudentDetailsComponent implements OnInit {
           // TODO do something
         }
       });
-
-    this.gameService.isDead.subscribe((dead: boolean) => {
-      this.characterIsDead = dead;
-    });
-
-    this.gameService.deathText.subscribe((text: string) => {
-      this.deathText = text;
-    });
-
-    this.gameService.wonTheGame.subscribe((won) => {
-      console.log('You WON!');
-      this.youWon = won;
-    });
   }
 
 }

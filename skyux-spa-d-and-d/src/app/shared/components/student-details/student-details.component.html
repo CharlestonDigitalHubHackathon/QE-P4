@@ -1,67 +1,6 @@
 <h1>Game Play ({{ student ? student.HS_Name : sid }})</h1>
 
-<div *ngIf="!gameStarted">
-  <img src="~/assets/gameimages/Level0.png" width="600px">
-
-  <p>
-      You are walking down the street near your home when you hear a loud humming sound and the street around you is suddenly cast into shadow. You look up to see a flying saucer overhead shoot a glowing beam at you. Before you can react, the glowing beam encases you and you are lifted off the ground. Your vision goes dark as your body is hurdled towards the alien spacecraft.
-  </p>
-
-  <p>
-    <button
-      type="button"
-      class="sky-btn sky-btn-primary"
-      (click)="startGame()">
-      Start the Game!
-    </button>
-  </p>
-
-</div>
-
-<div *ngIf="!characterIsDead && gameStarted && !youWon">
-  <app-game></app-game>
-</div>
-
-<div *ngIf="characterIsDead">
-  <h3>
-    You're dead!
-  </h3>
-  <img src="~/assets/gameimages/DeathScreen.png" width="600px">
-  <p>
-    {{ deathText }}
-  </p>
-
-  <p>
-    <button
-    type="button"
-    class="sky-btn sky-btn-primary"
-    (click)="tryAgain()">
-    Try Again
-  </button>
-</p>
-
-</div>
-
-<div *ngIf="youWon">
-  <h3>
-    You won!
-  </h3>
-  <img src="~/assets/gameimages/SuccessScreen.png" width="600px">
-  <p>
-      Congratulations, you escaped the evil Zoobs! You now are the only human on earth to own your own interstallar spaceship. The Galaxy is yours to explore!
-  </p>
-  <p>
-      TO BE CONTINUED...
-  </p>
-
-  <p>
-    <button
-    type="button"
-    class="sky-btn sky-btn-primary"
-    (click)="tryAgain()">
-    Try Again
-  </button>
-</div>
+<app-game></app-game>
 
 <app-money-meter>
 </app-money-meter>
