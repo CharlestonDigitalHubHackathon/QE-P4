@@ -1,23 +1,70 @@
 <h3 *ngIf="!character">Loading Character Bio...</h3>
 
 <div *ngIf="character">
-  <sky-avatar
-    [name]="character.name"
-    [src]="src">
-  </sky-avatar>
-
-  <ul>
-    <li>Name: {{ character.name }}</li>
-    <li>Country: {{ character.country }}</li>
-    <li>Age: {{ character.age }}</li>
-    <li>Gender: {{ character.gender }}</li>
-    <li>Malnourished: {{ character.undernourished }}</li>
-    <li>Literate: {{ character.literate }}</li>
-    <li>Education level: {{ character.educationLevel }}</li>
-    <li>Base health: {{ character.baseHealth }}</li>
-    <li>USD: {{ character.usd }}</li>
-    <li>Has basic math: {{ character.hasBasicMath }}</li>
-  </ul>
+  <div style="border: solid 1px #ccc">
+    <sky-page-summary>
+      <!-- <sky-page-summary-alert>
+        <sky-alert alertType="info">This is an alert.</sky-alert>
+      </sky-page-summary-alert> -->
+      <sky-page-summary-image>
+        <sky-avatar
+          [name]="character.name"
+          [src]="src"
+          [canChange]="false">
+        </sky-avatar>
+      </sky-page-summary-image>
+      <sky-page-summary-title>
+        {{ character.name }}
+      </sky-page-summary-title>
+      <sky-page-summary-subtitle>
+        {{ character.age }} year old {{ character.gender }} from {{ character.country }}
+      </sky-page-summary-subtitle>
+      <sky-page-summary-status>
+        <sky-label *ngIf="character.literate">
+          You are literate
+        </sky-label>
+        <sky-label labelType="warning" *ngIf="!character.literate">
+          You are illiterate
+        </sky-label>
+        <sky-label *ngIf="character.hasBasicMath">
+          You understand basic math
+        </sky-label>
+        <sky-label labelType="warning" *ngIf="!character.hasBasicMath">
+          You don't understand basic math
+        </sky-label>
+        <sky-label *ngIf="!character.undernourished">
+          You are properly nourishment
+        </sky-label>
+        <sky-label labelType="warning" *ngIf="character.undernourished">
+          You are malnourished
+        </sky-label>
+      </sky-page-summary-status>
+      <!-- <sky-page-summary-content>
+        This is the arbitrary content section. You can display any kind of content to complement the
+        content on a page. We recommend that you display content to support the key tasks of users of
+        users who visit the page. We also recommend that you keep in mind the context of how users
+        will use the content and limit the amount of content to avoid overloading the summary.
+      </sky-page-summary-content> -->
+      <sky-page-summary-key-info>
+        <sky-key-info>
+          <sky-key-info-value>
+            {{ character.usd | skyNumeric:{digits: 2, format: 'currency', iso: 'USD', truncate: false} }}
+          </sky-key-info-value>
+          <sky-key-info-label>
+            Money
+          </sky-key-info-label>
+        </sky-key-info>
+        <sky-key-info>
+          <sky-key-info-value>
+            Health
+          </sky-key-info-value>
+          <sky-key-info-label>
+            {{ character.baseHealth }}
+          </sky-key-info-label>
+        </sky-key-info>
+      </sky-page-summary-key-info>
+    </sky-page-summary>
+  </div>
 
   <h4>Inventory</h4>
   <div *ngIf="character.inventory.length === 0">

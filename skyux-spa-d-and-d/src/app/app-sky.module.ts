@@ -7,13 +7,14 @@ import {
 } from '@skyux/router';
 
 import {
-  SkyAlertModule
+  SkyAlertModule, SkyLabelModule, SkyKeyInfoModule
 } from '@skyux/indicators';
 
 import {
   SkyActionButtonModule,
   SkyCardModule,
-  SkyDefinitionListModule
+  SkyDefinitionListModule,
+  SkyPageSummaryModule
 } from '@skyux/layout';
 
 import {
@@ -23,6 +24,7 @@ import {
 import {
   SkyAvatarModule
 } from '@skyux/avatar';
+import { SkyNumericModule } from '@skyux/core';
 
 @NgModule({
   exports: [
@@ -32,7 +34,11 @@ import {
     SkyCardModule,
     SkyDefinitionListModule,
     SkyModalModule,
-    SkyAvatarModule
+    SkyAvatarModule,
+    SkyNumericModule,
+    SkyLabelModule,
+    SkyPageSummaryModule,
+    SkyKeyInfoModule
   ]
 })
 export class AppSkyModule { }
