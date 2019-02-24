@@ -1,7 +1,7 @@
 <h1>Game Play ({{ sid }})</h1>
 
 <div *ngIf="!gameStarted">
-    <img src="~/assets/gameimages/Level0.png" width="600px">
+  <img src="~/assets/gameimages/Level0.png" width="600px">
 
   <p>
       You are walking down the street near your home when you hear a loud humming sound and the street around you is suddenly cast into shadow. You look up to see a flying saucer overhead shoot a glowing beam at you. Before you can react, the glowing beam encases you and you are lifted off the ground. Your vision goes dark as your body is hurdled towards the alien spacecraft.
@@ -23,19 +23,17 @@
   <app-game-step-1 *ngIf="currentStep === 1">
   </app-game-step-1>
 
-  <app-game-step-stairway *ngIf="currentStep === 6">
-  </app-game-step-stairway>
+  <app-game-step-6 *ngIf="currentStep === 6">
+  </app-game-step-6>
 
-  <app-game-step-3-shuttle-bay *ngIf="currentStep === 3">
-    </app-game-step-3-shuttle-bay>
-
+  <app-game-step-3 *ngIf="currentStep === 3">
+  </app-game-step-3>
 
   <app-game-step-4 *ngIf="currentStep === 4">
-    </app-game-step-4>
-
+  </app-game-step-4>
 
   <app-game-step-5 *ngIf="currentStep === 5">
-    </app-game-step-5>
+  </app-game-step-5>
 </div>
 
 <div *ngIf="characterIsDead">

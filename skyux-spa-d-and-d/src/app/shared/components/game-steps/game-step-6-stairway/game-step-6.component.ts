@@ -4,15 +4,15 @@ import {
   OnInit,
   // ElementRef
 } from '@angular/core';
-import { Character } from '../../models';
-import { GameService } from '../../services';
+import { Character } from '../../../models';
+import { GameService } from '../../../services';
 
 @Component({
-  selector: 'app-game-step-stairway',
-  templateUrl: './game-step-stairway.component.html',
-  styleUrls: ['./game-step-stairway.component.scss']
+  selector: 'app-game-step-6',
+  templateUrl: './game-step-6.component.html',
+  styleUrls: ['./game-step-6.component.scss']
 })
-export class GameStepStairwayComponent implements OnInit {
+export class GameStep6Component implements OnInit {
 
   private character: Character;
 

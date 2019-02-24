@@ -4,8 +4,8 @@ import {
   OnInit,
   // ElementRef
 } from '@angular/core';
-import { Character } from '../../models';
-import { GameService } from '../../services';
+import { Character } from '../../../models';
+import { GameService } from '../../../services';
 
 @Component({
   selector: 'app-game-step-4',
