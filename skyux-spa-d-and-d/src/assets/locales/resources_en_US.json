@@ -60,6 +60,24 @@
   "game_characterbio_malnourished": {
     "message": "You are malnourished"
   },
+  "game_characterbio_gender_male": {
+    "message": "male"
+  },
+  "game_characterbio_gender_female": {
+    "message": "female"
+  },
+  "game_characterbio_country_china": {
+    "message": "China"
+  },
+  "game_characterbio_country_mexico": {
+    "message": "Mexico"
+  },
+  "game_characterbio_country_usa": {
+    "message": "United States"
+  },
+  "game_characterbio_country_zimbabwe": {
+    "message": "Zimbabwe"
+  },
   "game_inventory_title": {
     "message": "Inventory"
   },

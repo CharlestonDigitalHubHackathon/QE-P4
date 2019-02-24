@@ -17,7 +17,7 @@
       {{ character.name }}
     </sky-page-summary-title>
     <sky-page-summary-subtitle>
-      {{ 'game_characterbio_subtitle' | skyAppResources:character.age:character.gender:character.country }}
+      {{ 'game_characterbio_subtitle' | skyAppResources:character.age:localizedGender:localizedCountry }}
     </sky-page-summary-subtitle>
     <sky-page-summary-status>
       <sky-label *ngIf="character.literate">
