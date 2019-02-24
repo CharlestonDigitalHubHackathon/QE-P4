@@ -1,8 +1,6 @@
 import {
   Component,
-  // ViewChild,
-  OnInit,
-  // ElementRef
+  OnInit
 } from '@angular/core';
 import { Character } from '../../../models';
 import { GameService } from '../../../services';
@@ -34,7 +32,7 @@ export class GameStep4Component implements OnInit {
 
   }
 
-  ngOnInit() {
+  public ngOnInit() {
 
     this.gameService.character
       .subscribe((char: Character) => {
@@ -71,11 +69,11 @@ export class GameStep4Component implements OnInit {
 
     this.gameService.dockingClamp.subscribe((engaged) => {
       this.clampEngaged = engaged;
-    })
+    });
   }
 
   public makeChoice(id: number) {
-    var choice = this.choices.find((v) => v.id === id);
+    const choice = this.choices.find((v) => v.id === id);
     console.log('Choice made: ' + JSON.stringify(choice));
     switch (id) {
       case 1:
@@ -91,6 +89,7 @@ export class GameStep4Component implements OnInit {
         if (this.button1Pressed && this.button2Pressed && this.button3Pressed) {
           if (this.clampEngaged) {
             this.gameService.characterState.next(CharacterState.Failure);
+            /* tslint:disable-next-line:max-line-length */
             this.gameService.deathText.next('The space shuttle springs to life, but lurches suddenly. You hear a loud metallic ripping and look back to see the back half of the shuttle, now torn from the rest of the ship, just before the shuttle explodes. You feel a warming sensation as your body is engulfed by the flames');
           } else {
             this.gameService.characterState.next(CharacterState.Success);
@@ -99,6 +98,9 @@ export class GameStep4Component implements OnInit {
         } else {
           this.button4Pressed = true;
         }
+        break;
+      default:
+        break;
     }
   }
 

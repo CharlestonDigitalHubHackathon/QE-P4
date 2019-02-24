@@ -18,6 +18,7 @@ export class WishlistService {
 
   private _comment = '';
 
+  /* tslint:disable:max-line-length */
   private _wishlist: WishItem[] = [
     {
       'num': 1,
@@ -328,6 +329,7 @@ export class WishlistService {
       'page': 1
     }
   ];
+  /* tslint:enable:max-line-length */
 
   constructor() {}
 

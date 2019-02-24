@@ -1,8 +1,15 @@
 import {
-  Component, OnInit,
+  Component,
+  OnInit
 } from '@angular/core';
-import { GameService } from '../../services';
-import { CharacterState } from '../../models/character-state';
+
+import {
+  GameService
+} from '../../services';
+
+import {
+  CharacterState
+} from '../../models/character-state';
 
 @Component({
   selector: 'app-game',
@@ -19,7 +26,7 @@ export class GameComponent implements OnInit {
 
   constructor(private gameService: GameService) { }
 
-  ngOnInit() {
+  public ngOnInit() {
     this.gameService.gameStep.subscribe((stepNum) => {
       this.currentStep = stepNum;
     });

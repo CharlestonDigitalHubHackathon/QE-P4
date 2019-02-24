@@ -1,10 +1,13 @@
 import { CharacterState } from './character-state';
 
 export class DatabaseCharacter {
-  HC_ID?: string;
-  HC_Data: string;
-  HC_StudentID: string;
-  HC_Status: string;
+
+  /* tslint:disable:variable-name */
+  public HC_ID?: string;
+  public HC_Data: string;
+  public HC_StudentID: string;
+  public HC_Status: string;
+  /* tslint:enable:variable-name */
 
   public static fromCharacter(character: Character, status: CharacterState, studentId: string): DatabaseCharacter {
     return {

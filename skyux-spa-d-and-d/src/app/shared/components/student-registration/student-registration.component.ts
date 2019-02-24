@@ -76,7 +76,7 @@ export class StudentRegistrationComponent implements OnInit {
     this.waitSvc.beginBlockingPageWait();
     const student: Student = {
       HS_Name: this.registrationForm.controls.name.value,
-      HS_Share_Key: this.skyAppConfig.runtime.params.get('tid'),
+      HS_Share_Key: this.skyAppConfig.runtime.params.get('tid')
       // Characters: [
       //   DatabaseCharacter.fromCharacter(this.selectedCharacter, 'Not Started', ??)
       // ]

@@ -1,8 +1,6 @@
 import {
   Component,
-  // ViewChild,
-  OnInit,
-  // ElementRef
+  OnInit
 } from '@angular/core';
 import { Character } from '../../../models';
 import { GameService } from '../../../services';
@@ -29,7 +27,7 @@ export class GameStep1Component implements OnInit {
 
   }
 
-  ngOnInit() {
+  public ngOnInit() {
 
     this.gameService.character
       .subscribe((char: Character) => {
@@ -63,7 +61,7 @@ export class GameStep1Component implements OnInit {
   }
 
   public makeChoice(id: number) {
-    var choice = this.choices.find((v) => v.id === id);
+    const choice = this.choices.find((v) => v.id === id);
     console.log('Choice made: ' + JSON.stringify(choice));
     switch (id) {
       case 1:
@@ -74,11 +72,15 @@ export class GameStep1Component implements OnInit {
         break;
       case 2:
         this.gameService.characterState.next(CharacterState.Failure);
+        /* tslint:disable-next-line:max-line-length */
         this.gameService.deathText.next('you open the door and find yourself in a small chamber. The door closes behind you and a voice from a speaker says, "De-Atomizer Engaged." You feel a slight pinching sensation as all all the atoms of your body disintegrate. ');
         break;
       case 3:
         this.gameService.characterState.next(CharacterState.Failure);
+        /* tslint:disable-next-line:max-line-length */
         this.gameService.deathText.next('The wrench strikes the alien in the back of its "head." It emits a gutteral howl and turns to face you. It pulls a strange contraption from its belt and aims it at you. You feel a tickling sensation as your body is flooded with electric current. The alien then jettisons your lifeless body out the airlock.');
+        break;
+      default:
         break;
     }
   }
@@ -86,31 +88,33 @@ export class GameStep1Component implements OnInit {
   private caesarShift(str: string, amount: number): string {
 
     // Wrap the amount
-    if (amount < 0)
+    if (amount < 0) {
       return this.caesarShift(str, amount + 26);
+    }
 
     // Make an output variable
-    var output = '';
+    let output = '';
 
     // Go through each character
-    for (var i = 0; i < str.length; i ++) {
+    for (let i = 0; i < str.length; i ++) {
 
       // Get the character we'll be appending
-      var c = str[i];
+      let c = str[i];
 
       // If it's a letter...
       if (c.match(/[a-z]/i)) {
 
         // Get its code
-        var code = str.charCodeAt(i);
+        let code = str.charCodeAt(i);
 
         // Uppercase letters
-        if ((code >= 65) && (code <= 90))
+        if ((code >= 65) && (code <= 90)) {
           c = String.fromCharCode(((code - 65 + amount) % 26) + 65);
 
         // Lowercase letters
-        else if ((code >= 97) && (code <= 122))
+        } else if ((code >= 97) && (code <= 122)) {
           c = String.fromCharCode(((code - 97 + amount) % 26) + 97);
+        }
 
       }
 
@@ -122,5 +126,5 @@ export class GameStep1Component implements OnInit {
     // All done!
     return output;
 
-  };
+  }
 }

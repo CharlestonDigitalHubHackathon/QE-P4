@@ -1,8 +1,6 @@
 import {
   Component,
-  // ViewChild,
-  OnInit,
-  // ElementRef
+  OnInit
 } from '@angular/core';
 import { Character } from '../../../models';
 import { GameService } from '../../../services';
@@ -26,7 +24,7 @@ export class GameStep3Component implements OnInit {
 
   }
 
-  ngOnInit() {
+  public ngOnInit() {
 
     this.gameService.character
       .subscribe((char: Character) => {
@@ -62,7 +60,7 @@ export class GameStep3Component implements OnInit {
   }
 
   public makeChoice(id: number) {
-    var choice = this.choices.find((v) => v.id === id);
+    const choice = this.choices.find((v) => v.id === id);
     console.log('Choice made: ' + JSON.stringify(choice));
     switch (id) {
       case 1:
@@ -79,6 +77,8 @@ export class GameStep3Component implements OnInit {
       case 4:
         this.gameService.gameStep.next(6);
         this.gameService.addMoney(1);
+        break;
+      default:
         break;
     }
   }

@@ -19,7 +19,7 @@ export class SkyAvatarDemoComponent implements OnInit {
     private skyAppAssetsService: SkyAppAssetsService
   ) { }
 
-  ngOnInit() {
+  public ngOnInit() {
     let ethnicity: string;
     switch (this.character.country) {
       case 'Zimbabwe':
@@ -41,7 +41,7 @@ export class SkyAvatarDemoComponent implements OnInit {
     let gender = this.character.gender === 'female' ? 'Female' : 'Male';
 
     // TODO add hispanic female avatar
-    if (ethnicity !== 'Hispanic' && gender != 'Female') {
+    if (ethnicity !== 'Hispanic' && gender !== 'Female') {
       this.avatarUrl = this.skyAppAssetsService.getUrl(`avatars/${ethnicity}${gender}.png`);
     }
 
