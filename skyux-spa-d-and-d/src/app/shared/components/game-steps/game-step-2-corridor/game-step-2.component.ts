@@ -12,7 +12,7 @@ import { GameService } from '../../../services';
 })
 export class GameStep2Component implements OnInit {
 
-  private character: Character;
+  public character: Character;
 
   private SHIFT_NUM = Math.floor(Math.random() * Math.floor(26));
 

@@ -13,7 +13,7 @@ import { CharacterState } from '../../../models/character-state';
 })
 export class GameStep4Component implements OnInit {
 
-  private character: Character;
+  public character: Character;
 
   public choices: any[];
 
