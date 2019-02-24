@@ -89,10 +89,10 @@ export class GameStep4Component implements OnInit {
       case 4:
         if (this.button1Pressed && this.button2Pressed && this.button3Pressed) {
           if (this.clampEngaged) {
-            this.gameService.isDead.next(true);
+            this.gameService.characterState.next(CharacterState.Failure);
             this.gameService.deathText.next('The space shuttle springs to life, but lurches suddenly. You hear a loud metallic ripping and look back to see the back half of the shuttle, now torn from the rest of the ship, just before the shuttle explodes. You feel a warming sensation as your body is engulfed by the flames');
           } else {
-            this.gameService.wonTheGame.next(true);
+            this.gameService.characterState.next(CharacterState.Success);
             this.gameService.money.next(10);
           }
         } else {

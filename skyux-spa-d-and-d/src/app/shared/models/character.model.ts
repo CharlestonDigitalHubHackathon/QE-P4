@@ -1,4 +1,5 @@
 export interface Character {
+  HS_ID?: string;
   country: string;
   age: number;
   gender: string;

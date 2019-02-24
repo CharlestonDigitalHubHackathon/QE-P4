@@ -23,31 +23,28 @@ export class GameComponent implements OnInit {
       this.currentStep = stepNum;
     });
 
-    this.gameService.isDead.subscribe((dead: boolean) => {
-      this.characterIsDead = dead;
+    this.gameService.characterState.subscribe((state: CharacterState) => {
+      this.characterIsDead = state === CharacterState.Failure;
+      this.youWon = state === CharacterState.Success;
     });
 
     this.gameService.deathText.subscribe((text: string) => {
       this.deathText = text;
     });
 
-    this.gameService.wonTheGame.subscribe((won) => {
-      console.log('You WON!');
-      this.youWon = won;
-    });
   }
 
   public startGame() {
     console.log('Starting the game');
     this.gameStarted = true;
     this.gameService.gameStep.next(1);
+    this.gameService.characterState.next(CharacterState.InGame);
   }
 
   public tryAgain() {
     console.log('Try again');
-    this.gameService.isDead.next(false);
     this.gameService.gameStep.next(1);
-    this.gameService.wonTheGame.next(false);
+    this.gameService.characterState.next(CharacterState.NotPlaying);
     this.gameService.dockingClamp.next(true);
     this.gameStarted = false;
   }
