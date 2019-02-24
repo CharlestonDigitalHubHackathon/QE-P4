@@ -1,9 +1,19 @@
 import {
-  Component, OnInit
+  Component,
+  OnInit
 } from '@angular/core';
 
-import { WishlistService } from '../../services';
-import { WishItem } from '../../models/wishitem.model';
+import {
+  SkyModalInstance
+} from '@skyux/modals';
+
+import {
+  WishlistService
+} from '../../services';
+
+import {
+  WishItem
+} from '../../models/wishitem.model';
 
 @Component({
   selector: 'app-wishlist',
@@ -15,13 +25,19 @@ export class WishlistComponent implements OnInit {
   public wishlist: WishItem[];
 
   constructor(
+    private instance: SkyModalInstance,
     private wishlistService: WishlistService
   ) {}
 
   public ngOnInit() {
-    this.wishlistService.getItems()
+    this.wishlistService
+      .getItems()
       .subscribe((wishlist: WishItem[]) =>  {
         this.wishlist = wishlist;
       });
+  }
+
+  public close() {
+    this.instance.close();
   }
 }

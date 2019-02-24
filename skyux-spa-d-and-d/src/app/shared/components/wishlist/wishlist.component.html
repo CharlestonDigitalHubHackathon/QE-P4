@@ -1,1 +1,31 @@
-<h1>Wishlist</h1>
+<sky-modal>
+    <sky-modal-header>
+      {{ 'wishlist_header' | skyAppResources }}
+    </sky-modal-header>
+    <sky-modal-content>
+      <sky-card
+        *ngFor="let item of wishlist">
+        <sky-card-title>
+          {{ item.name }}
+        </sky-card-title>
+        <sky-card-content>
+          <img [src]="item.picture" />
+        </sky-card-content>
+        <sky-card-actions>
+          <a
+            [href]="item.link"
+            class="sky-btn sky-btn-secondary">
+            {{ 'wishlist_buy' | skyAppResources }} {{ item['new-price'] }}
+          </a>
+        </sky-card-actions>
+      </sky-card>
+    </sky-modal-content>
+    <sky-modal-footer>
+      <button
+        type="button"
+        class="sky-btn sky-btn-primary"
+        (click)="close()">
+        Close
+      </button>
+    </sky-modal-footer>
+  </sky-modal>
