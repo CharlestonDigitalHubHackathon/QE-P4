@@ -1,0 +1,25 @@
+<h2>Electrified Corridor</h2>
+
+<!-- TODO image -->
+<!-- <img src="~/not-assets/gameimages/Level7.png" [width]="WIDTH"> -->
+
+<p>
+  There are electric fields crisscrossing the area.
+</p>
+<!-- TODO flavor text -->
+
+<sky-action-button-container>
+  <sky-action-button
+    *ngFor="let choice of choices"
+    (actionClick)="makeChoice(choice.id)">
+    <sky-action-button-icon
+      [iconType]="choice.icon">
+    </sky-action-button-icon>
+    <sky-action-button-header>
+      {{ choice.name }}
+    </sky-action-button-header>
+    <sky-action-button-details>
+      {{ choice.description }}
+    </sky-action-button-details>
+  </sky-action-button>
+</sky-action-button-container>

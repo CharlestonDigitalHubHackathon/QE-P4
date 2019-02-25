@@ -19,7 +19,7 @@
 
 <div *ngIf="!characterIsDead && gameStarted && !youWon">
 
-  <app-game-step-0 *ngIf="currentStep === 0">
+  <app-game-step-0 *ngIf="0 > [1,2,3,4,5,6,7,8].indexOf(currentStep)">
   </app-game-step-0>
 
   <app-game-step-1 *ngIf="currentStep === 1">
@@ -39,6 +39,12 @@
 
   <app-game-step-6 *ngIf="currentStep === 6">
   </app-game-step-6>
+
+  <app-game-step-7 *ngIf="currentStep === 7">
+  </app-game-step-7>
+
+  <app-game-step-8 *ngIf="currentStep === 8">
+  </app-game-step-8>
 
 </div>
 

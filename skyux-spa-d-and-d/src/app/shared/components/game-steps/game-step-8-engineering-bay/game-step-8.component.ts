@@ -4,14 +4,16 @@ import {
 } from '@angular/core';
 import { Character } from '../../../models';
 import { GameService } from '../../../services';
+import { CharacterState } from '../../../models/character-state';
 import { SkyWaitService } from '@skyux/indicators';
+import { SkyAppResourcesService } from '@skyux/i18n';
 
 @Component({
-  selector: 'app-game-step-2',
-  templateUrl: './game-step-2.component.html',
-  styleUrls: ['./game-step-2.component.scss']
+  selector: 'app-game-step-8',
+  templateUrl: './game-step-8.component.html',
+  styleUrls: ['./game-step-8.component.scss']
 })
-export class GameStep2Component implements OnInit {
+export class GameStep8Component implements OnInit {
 
   public character: Character;
 
@@ -20,11 +22,19 @@ export class GameStep2Component implements OnInit {
   public choices: any[];
 
   public WIDTH = 600;
+  private deatomizerDeath: string;
+  private wrenchDeath: string;
 
   constructor(
     private gameService: GameService,
-    private waitSvc: SkyWaitService
+    private waitSvc: SkyWaitService,
+    private resourcesSvc: SkyAppResourcesService
   ) {
+
+    this.resourcesSvc.getString('game_failure_alien_deatomizer')
+      .subscribe((s) => this.deatomizerDeath = s);
+    this.resourcesSvc.getString('game_failure_alien_wrench')
+      .subscribe((s) => this.wrenchDeath = s);
 
   }
 
@@ -37,15 +47,21 @@ export class GameStep2Component implements OnInit {
         this.choices = [
           {
             id: 1,
-            icon: 'arrow-left',
-            name: this.character.literate ? 'Shuttle Bay, Bridge' : this.caesarShift('Shuttle Bay, Bridge', this.SHIFT_NUM),
-            description: 'Go Left'
+            icon: 'unsorted',
+            name: 'Use the elevator',
+            description: ''
           },
           {
             id: 2,
-            icon: 'arrow-right',
-            name: this.character.literate ? 'Engineering Bay' : this.caesarShift('Engineering Bay', this.SHIFT_NUM),
-            description: 'Go Right'
+            icon: 'map-pin',
+            name: 'Inspect the strange lever',
+            description: ''
+          },
+          {
+            id: 3,
+            icon: 'gears',
+            name: 'Inspect the engine',
+            description: ''
           }
         ];
 
@@ -58,14 +74,21 @@ export class GameStep2Component implements OnInit {
     console.log('Choice made: ' + JSON.stringify(choice));
     switch (id) {
       case 1:
-        this.gameService.updateGameStep(6)
+        this.gameService.updateGameStep(9)
           .subscribe(() => {
             this.gameService.addMoney(1);
             this.waitSvc.endBlockingPageWait();
           });
         break;
       case 2:
-        this.gameService.updateGameStep(7)
+        this.gameService.updateGameStep(10)
+          .subscribe(() => {
+            this.gameService.addMoney(1);
+            this.waitSvc.endBlockingPageWait();
+          });
+        break;
+      case 3:
+        this.gameService.updateGameStep(11)
           .subscribe(() => {
             this.gameService.addMoney(1);
             this.waitSvc.endBlockingPageWait();

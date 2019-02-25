@@ -1,0 +1,24 @@
+<h2>Engineering Bay</h2>
+
+<!-- TODO art -->
+<!-- <img src="~/not-assets/gameimages/Level8.png" [width]="WIDTH"> -->
+
+<p>
+  TODO flavor text
+</p>
+
+<sky-action-button-container>
+  <sky-action-button
+    *ngFor="let choice of choices"
+    (actionClick)="makeChoice(choice.id)">
+    <sky-action-button-icon
+      [iconType]="choice.icon">
+    </sky-action-button-icon>
+    <sky-action-button-header>
+      {{ choice.name }}
+    </sky-action-button-header>
+    <sky-action-button-details>
+      {{ choice.description }}
+    </sky-action-button-details>
+  </sky-action-button>
+</sky-action-button-container>
