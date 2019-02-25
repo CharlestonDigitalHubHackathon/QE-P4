@@ -57,8 +57,9 @@ export class StudentDetailsComponent implements OnInit {
             this.gameService.gameStep.next(character.step);
           }
           this.gameService.characterState.next(status);
-          this.waitSvc.endBlockingPageWait();
         }
+
+        this.waitSvc.endBlockingPageWait();
       });
 
     this.gameService.character
