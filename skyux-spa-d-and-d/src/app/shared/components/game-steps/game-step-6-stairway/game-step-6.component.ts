@@ -46,13 +46,13 @@ export class GameStep6Component implements OnInit {
         this.choices = [
           {
             id: 1,
-            icon: 'arrow-up',
+            icon: 'level-up',
             name: 'Go up',
             description: this.character.undernourished ? this.stepHealthWarning : ''
           },
           {
             id: 2,
-            icon: 'arrow-down',
+            icon: 'level-down',
             name: 'Go down',
             description: ''
           }

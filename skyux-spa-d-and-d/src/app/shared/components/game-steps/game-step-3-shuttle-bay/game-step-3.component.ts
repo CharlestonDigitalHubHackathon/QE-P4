@@ -1,7 +1,6 @@
 import {
   Component,
-  OnInit,
-  ViewEncapsulation
+  OnInit
 } from '@angular/core';
 import { Character } from '../../../models';
 import { GameService } from '../../../services';
@@ -10,8 +9,7 @@ import { SkyWaitService } from '@skyux/indicators';
 @Component({
   selector: 'app-game-step-3',
   templateUrl: './game-step-3.component.html',
-  styleUrls: ['./game-step-3.component.scss'],
-  encapsulation: ViewEncapsulation.None
+  styleUrls: ['./game-step-3.component.scss']
 })
 export class GameStep3Component implements OnInit {
 
@@ -62,7 +60,7 @@ export class GameStep3Component implements OnInit {
           // },
           {
             id: 4,
-            icon: 'arrow-down',
+            icon: 'level-down',
             name: 'Go down stairs',
             description: ''
           }

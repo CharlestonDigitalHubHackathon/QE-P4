@@ -1,7 +1,6 @@
 import {
   Component,
-  OnInit,
-  ViewEncapsulation
+  OnInit
 } from '@angular/core';
 import { Character } from '../../../models';
 import { GameService } from '../../../services';
@@ -12,8 +11,7 @@ import { SkyAppResourcesService } from '@skyux/i18n';
 @Component({
   selector: 'app-game-step-4',
   templateUrl: './game-step-4.component.html',
-  styleUrls: ['./game-step-4.component.scss'],
-  encapsulation: ViewEncapsulation.None
+  styleUrls: ['./game-step-4.component.scss']
 })
 export class GameStep4Component implements OnInit {
 
@@ -113,6 +111,7 @@ export class GameStep4Component implements OnInit {
           }
         } else {
           this.button4Pressed = true;
+          this.waitSvc.endBlockingPageWait();
         }
         break;
       default:

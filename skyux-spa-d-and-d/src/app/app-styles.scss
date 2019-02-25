@@ -1,4 +1,18 @@
+@import '~@skyux/theme/scss/mixins';
+
 body {
   background: #FFF;
   margin: 0 20px;
+}
+
+.icon-red .fa.sky-action-button-icon {
+  color: $sky-highlight-color-danger;
+}
+
+.icon-yellow .fa.sky-action-button-icon {
+  color: $sky-highlight-color-warning;
+}
+
+.icon-green .fa.sky-action-button-icon {
+  color: $sky-highlight-color-success;
 }

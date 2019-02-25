@@ -28,11 +28,16 @@
   <p *ngIf="button1Pressed && button2Pressed && button3Pressed">
     The button glows green. One more to go.
   </p>
-  <p *ngIf="!button1Pressed && button2Pressed || (!button1Pressed || !button2Pressed) && button3Pressed || button4Pressed && (!button1Pressed || !button2Pressed || !button3Pressed)">
-    You hear a loud buzzing sound and receive a shock.
-  </p>
 
 </sky-alert>
+
+<sky-alert
+  alertType="warning"
+  *ngIf="!button1Pressed && button2Pressed || (!button1Pressed || !button2Pressed) && button3Pressed || button4Pressed && (!button1Pressed || !button2Pressed || !button3Pressed)">
+
+  <i class="fa fa-bolt"></i>&nbsp;You hear a loud buzzing sound and receive a shock.
+</sky-alert>
+
 
 <!-- sky-action-button sky-btn-default sky-rounded-corners -->
 <sky-action-button-container>
