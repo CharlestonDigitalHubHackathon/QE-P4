@@ -1,6 +1,7 @@
 import {
   Component,
-  OnInit
+  OnInit,
+  ViewEncapsulation
 } from '@angular/core';
 import { Character } from '../../../models';
 import { GameService } from '../../../services';
@@ -9,7 +10,8 @@ import { SkyWaitService } from '@skyux/indicators';
 @Component({
   selector: 'app-game-step-3',
   templateUrl: './game-step-3.component.html',
-  styleUrls: ['./game-step-3.component.scss']
+  styleUrls: ['./game-step-3.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 export class GameStep3Component implements OnInit {
 
@@ -38,13 +40,20 @@ export class GameStep3Component implements OnInit {
             icon: 'space-shuttle',
             name: 'Get in Shuttle',
             description: ''
-          },
-          {
+          }
+        ];
+
+        if (this.gameService.dockingClamp.value) {
+          this.choices.push({
             id: 2,
-            icon: 'circle-o',
+            icon: 'power-off',
+            iconClass: 'icon-red',
             name: 'Inspect glowing red button ',
             description: ''
-          },
+          });
+        }
+
+        this.choices.push(
           // {
           //   id: 3,
           //   icon: 'arrow-circle-o-right',
@@ -53,11 +62,11 @@ export class GameStep3Component implements OnInit {
           // },
           {
             id: 4,
-            icon: 'arrow-circle-o-right',
+            icon: 'arrow-down',
             name: 'Go down stairs',
             description: ''
           }
-        ];
+        );
       });
   }
 

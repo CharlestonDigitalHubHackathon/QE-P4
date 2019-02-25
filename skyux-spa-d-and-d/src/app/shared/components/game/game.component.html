@@ -1,10 +1,9 @@
-
 <div *ngIf="!gameStarted">
 
   <img src="~/assets/gameimages/Level0.png" width="600px">
 
   <p>
-      You are walking down the street near your home when you hear a loud humming sound and the street around you is suddenly cast into shadow. You look up to see a flying saucer overhead shoot a glowing beam at you. Before you can react, the glowing beam encases you and you are lifted off the ground. Your vision goes dark as your body is hurtled towards the alien spacecraft.
+    {{ 'game_intro_alien' | skyAppResources }}
   </p>
 
   <p>
@@ -12,7 +11,7 @@
       type="button"
       class="sky-btn sky-btn-primary"
       (click)="startGame()">
-      Start the Game!
+      {{ 'game_start_button' | skyAppResources}}
     </button>
   </p>
 
@@ -45,7 +44,7 @@
 
 <div *ngIf="characterIsDead">
   <h3>
-    You're dead!
+    {{ 'game_failure_alien_title' | skyAppResources }}
   </h3>
   <img src="~/assets/gameimages/DeathScreen.png" width="600px">
   <p>
@@ -57,7 +56,7 @@
     type="button"
     class="sky-btn sky-btn-primary"
     (click)="tryAgain()">
-    Try Again
+    {{ 'game_restart_button' | skyAppResources }}
   </button>
 </p>
 
@@ -65,14 +64,14 @@
 
 <div *ngIf="youWon">
   <h3>
-    You won!
+    {{ 'game_won' | skyAppResources }}
   </h3>
   <img src="~/assets/gameimages/SuccessScreen.png" width="600px">
   <p>
-      Congratulations, you escaped the evil Zoobs! You now are the only human on earth to own your own interstallar spaceship. The Galaxy is yours to explore!
+    {{ 'game_success_alien' | skyAppResources }}
   </p>
   <p>
-      TO BE CONTINUED...
+    {{ 'game_tobecontinued' | skyAppResources }}
   </p>
 
   <p>
@@ -80,6 +79,6 @@
     type="button"
     class="sky-btn sky-btn-primary"
     (click)="tryAgain()">
-    Try Again
+    {{ 'game_restart_button' | skyAppResources }}
   </button>
 </div>

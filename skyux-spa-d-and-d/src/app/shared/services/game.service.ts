@@ -18,7 +18,7 @@ export class GameService {
   public character: BehaviorSubject<Character> = new BehaviorSubject(undefined);
   public characterState: BehaviorSubject<CharacterState> = new BehaviorSubject(CharacterState.NotPlaying);
   public characterStateText: ReplaySubject<string> = new ReplaySubject(0);
-  public dockingClamp: ReplaySubject<boolean> = new ReplaySubject(0);
+  public dockingClamp: BehaviorSubject<boolean> = new BehaviorSubject(true);
 
   public money: ReplaySubject<number> = new ReplaySubject(0);
   private currentMoney = 0;

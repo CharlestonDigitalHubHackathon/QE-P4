@@ -53,7 +53,7 @@ export class SkyAvatarDemoComponent implements OnInit {
     }
     let pic2 = this.character.gender === 'female' ? 'Female' : 'Male';
     // TODO add hispanic female avatar
-    if (pic1 !== 'Hispanic' && pic2 !== 'Female') {
+    if (!(pic1 === 'Hispanic' && pic2 === 'Female')) {
       this.avatarUrl = this.skyAppAssetsService.getUrl(`avatars/${pic1}${pic2}.png`);
     }
 

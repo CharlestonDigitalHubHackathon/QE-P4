@@ -23,6 +23,27 @@
   "wishlist_buy": {
     "message": "Buy"
   },
+  "game_start_button": {
+    "message": "Start the Game!"
+  },
+  "game_restart_button": {
+    "message": "Try Again"
+  },
+  "game_won": {
+    "message": "You won!"
+  },
+  "game_intro_alien": {
+    "message": "You are walking down the street near your home when you hear a loud humming sound and the street around you is suddenly cast into shadow. You look up to see a flying saucer overhead shoot a glowing beam at you. Before you can react, the glowing beam encases you and you are lifted off the ground. Your vision goes dark as your body is hurtled towards the alien spacecraft."
+  },
+  "game_success_alien": {
+    "message": "Congratulations, you escaped the evil Zoobs! You now are the only human on earth to own your own interstallar spaceship. The Galaxy is yours to explore!"
+  },
+  "game_tobecontinued": {
+    "message": "TO BE CONTINUED..."
+  },
+  "game_failure_alien_title": {
+    "message": "You're dead!"
+  },
   "game_failure_alien_deatomizer": {
     "message": "You open the door and find yourself in a small chamber. The door closes behind you and a voice from a speaker says, \"De-Atomizer Engaged.\" You feel a slight pinching sensation as all all the atoms of your body disintegrate."
   },
@@ -89,5 +110,8 @@
   },
   "game_health_title": {
     "message": "Health"
+  },
+  "game_step_incomplete": {
+    "message": "Sorry, we aren't done with this game yet. You've reached a page you can't continue from."
   }
 }

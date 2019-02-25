@@ -1,6 +1,7 @@
 import {
   Component,
-  OnInit
+  OnInit,
+  ViewEncapsulation
 } from '@angular/core';
 import { Character } from '../../../models';
 import { GameService } from '../../../services';
@@ -9,7 +10,8 @@ import { SkyWaitService } from '@skyux/indicators';
 @Component({
   selector: 'app-game-step-5',
   templateUrl: './game-step-5.component.html',
-  styleUrls: ['./game-step-5.component.scss']
+  styleUrls: ['./game-step-5.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 export class GameStep5Component implements OnInit {
 
@@ -37,13 +39,14 @@ export class GameStep5Component implements OnInit {
         this.choices = [
           {
             id: 1,
-            icon: 'circle-o',
+            icon: 'power-off',
+            iconClass: 'icon-red',
             name: 'Press the Glowing Red Button',
             description: ''
           },
           {
             id: 2,
-            icon: 'circle-o',
+            icon: 'ban',
             name: 'Leave the Glowing Button alone',
             description: ''
           }

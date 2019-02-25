@@ -19,7 +19,7 @@
 <sky-alert *ngIf="button1Pressed"
   alertType="info">
 
-<p *ngIf="button1Pressed && !button2Pressed && !button3Pressed">
+  <p *ngIf="button1Pressed && !button2Pressed && !button3Pressed">
     The button glows red. Three more to go.
   </p>
   <p *ngIf="button1Pressed && button2Pressed && !button3Pressed">
@@ -40,6 +40,7 @@
     *ngFor="let choice of choices"
     (actionClick)="makeChoice(choice.id)">
     <sky-action-button-icon
+      [class]="choice.iconClass"
       [iconType]="choice.icon">
     </sky-action-button-icon>
     <sky-action-button-header>

@@ -1,0 +1,13 @@
+@import '~@skyux/theme/scss/mixins';
+
+.icon-red .fa.sky-action-button-icon {
+  color: $sky-highlight-color-danger;
+}
+
+.icon-yellow .fa.sky-action-button-icon {
+  color: $sky-highlight-color-warning;
+}
+
+.icon-green .fa.sky-action-button-icon {
+  color: $sky-highlight-color-success;
+}

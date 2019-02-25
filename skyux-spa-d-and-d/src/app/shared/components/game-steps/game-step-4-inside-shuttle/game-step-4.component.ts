@@ -1,6 +1,7 @@
 import {
   Component,
-  OnInit
+  OnInit,
+  ViewEncapsulation
 } from '@angular/core';
 import { Character } from '../../../models';
 import { GameService } from '../../../services';
@@ -11,7 +12,8 @@ import { SkyAppResourcesService } from '@skyux/i18n';
 @Component({
   selector: 'app-game-step-4',
   templateUrl: './game-step-4.component.html',
-  styleUrls: ['./game-step-4.component.scss']
+  styleUrls: ['./game-step-4.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 export class GameStep4Component implements OnInit {
 
@@ -49,25 +51,25 @@ export class GameStep4Component implements OnInit {
         this.choices = [
           {
             id: 1,
-            icon: 'circle-o',
+            icon: 'power-off',
             name: 'Press button ' + (this.character.hasBasicMath ? '1' : '#'),
             description: ''
           },
           {
             id: 2,
-            icon: 'circle-o',
+            icon: 'power-off',
             name: 'Press button ' + (this.character.hasBasicMath ? '2' : '%'),
             description: ''
           },
           {
             id: 3,
-            icon: 'circle-o',
+            icon: 'power-off',
             name: 'Press button ' + (this.character.hasBasicMath ? '3' : '$'),
             description: ''
           },
           {
             id: 4,
-            icon: 'circle-o',
+            icon: 'power-off',
             name: 'Press button ' + (this.character.hasBasicMath ? '4' : '&'),
             description: ''
           }
@@ -81,18 +83,21 @@ export class GameStep4Component implements OnInit {
   }
 
   public makeChoice(id: number) {
-    this.waitSvc.beginBlockingPageWait();
     switch (id) {
       case 1:
         this.button1Pressed = true;
+        this.choices[0].iconClass = 'icon-red';
         break;
       case 2:
         this.button2Pressed = true;
+        this.choices[1].iconClass = 'icon-yellow';
         break;
       case 3:
         this.button3Pressed = true;
+        this.choices[2].iconClass = 'icon-green';
         break;
       case 4:
+        this.waitSvc.beginBlockingPageWait();
         if (this.button1Pressed && this.button2Pressed && this.button3Pressed) {
           if (this.clampEngaged) {
             this.gameService.updateCharacterState(CharacterState.Failure, this.clampDeath)

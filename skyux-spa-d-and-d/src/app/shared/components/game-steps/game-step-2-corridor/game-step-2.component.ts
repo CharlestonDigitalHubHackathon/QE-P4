@@ -37,13 +37,13 @@ export class GameStep2Component implements OnInit {
         this.choices = [
           {
             id: 1,
-            icon: 'arrow-circle-o-left',
+            icon: 'arrow-left',
             name: this.character.literate ? 'Shuttle Bay, Bridge' : this.caesarShift('Shuttle Bay, Bridge', this.SHIFT_NUM),
             description: 'Go Left'
           },
           {
             id: 2,
-            icon: 'arrow-circle-o-right',
+            icon: 'arrow-right',
             name: this.character.literate ? 'Engineering Bay' : this.caesarShift('Engineering Bay', this.SHIFT_NUM),
             description: 'Go Right'
           }

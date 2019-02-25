@@ -49,7 +49,6 @@ export class GameComponent implements OnInit {
 
   public startGame() {
     this.waitSvc.beginBlockingPageWait();
-    console.log('Starting the game');
     this.gameService.startGame()
       .subscribe(() => {
         this.waitSvc.endBlockingPageWait();

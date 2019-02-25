@@ -3,12 +3,12 @@
 <!-- <img src="~/assets/gameimages/Level1.png" [width]="WIDTH"> -->
 
 <p>
-  Sorry, we aren't done with this game yet. You've reached a page you can't continue from.
+  {{ 'game_step_incomplete' | skyAppResources }}
 </p>
 
 <button
   type="button"
   class="sky-btn sky-btn-primary"
   (click)="tryAgain()">
-  Try Again
+  {{ 'game_restart_button' | skyAppResources }}
 </button>
