@@ -4,8 +4,7 @@
   "description": "This project was created for the hackathon at the Booz Allen Hamilton Charleston Digital Hub on February 23, 2019.",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js",
-    "start:dev": "nodemon index.js",
+    "start": "nodemon index.js",
     "heroku-prebuild": "cd skyux-spa-d-and-d && npm i && npx skyux build"
   },
   "repository": {
