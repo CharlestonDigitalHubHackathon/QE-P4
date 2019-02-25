@@ -33,7 +33,7 @@
 
 <sky-alert
   alertType="warning"
-  *ngIf="!button1Pressed && button2Pressed || (!button1Pressed || !button2Pressed) && button3Pressed || button4Pressed && (!button1Pressed || !button2Pressed || !button3Pressed)">
+  *ngIf="zapped">
 
   <i class="fa fa-bolt"></i>&nbsp;You hear a loud buzzing sound and receive a shock.
 </sky-alert>

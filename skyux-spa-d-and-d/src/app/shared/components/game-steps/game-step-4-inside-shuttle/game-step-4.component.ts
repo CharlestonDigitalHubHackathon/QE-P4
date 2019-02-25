@@ -21,6 +21,7 @@ export class GameStep4Component implements OnInit {
 
   public WIDTH = 600;
 
+  public zapped = false;
   public button1Pressed = false;
   public button2Pressed = false;
   public button3Pressed = false;
@@ -81,22 +82,31 @@ export class GameStep4Component implements OnInit {
   }
 
   public makeChoice(id: number) {
+    this.zapped = false;
     switch (id) {
       case 1:
         this.button1Pressed = true;
         this.choices[0].iconClass = 'icon-red';
         break;
       case 2:
-        this.button2Pressed = true;
-        this.choices[1].iconClass = 'icon-yellow';
+        if (this.button1Pressed) {
+          this.button2Pressed = true;
+          this.choices[1].iconClass = 'icon-yellow';
+        } else {
+          this.zapped = true;
+        }
         break;
       case 3:
-        this.button3Pressed = true;
-        this.choices[2].iconClass = 'icon-green';
+        if (this.button1Pressed && this.button2Pressed) {
+          this.button3Pressed = true;
+          this.choices[2].iconClass = 'icon-green';
+        } else {
+          this.zapped = true;
+        }
         break;
       case 4:
-        this.waitSvc.beginBlockingPageWait();
         if (this.button1Pressed && this.button2Pressed && this.button3Pressed) {
+          this.waitSvc.beginBlockingPageWait();
           if (this.clampEngaged) {
             this.gameService.updateCharacterState(CharacterState.Failure, this.clampDeath)
               .subscribe(() => {
@@ -110,8 +120,7 @@ export class GameStep4Component implements OnInit {
             this.gameService.addMoney(5);
           }
         } else {
-          this.button4Pressed = true;
-          this.waitSvc.endBlockingPageWait();
+          this.zapped = true;
         }
         break;
       default:
