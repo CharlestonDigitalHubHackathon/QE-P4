@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
-    "start:dev": "nodemon index.js"
+    "start:dev": "nodemon index.js",
+    "heroku-prebuild": "npm i -g @blackbaud/skyux-cli",
+    "heroku-postbuild": "cd skyux-spa-d-and-d && skyux build"
   },
   "repository": {
     "type": "git",
